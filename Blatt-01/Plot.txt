@@ -1,0 +1,33 @@
+set term pdfcairo enhanced
+set samples 100000
+
+#set size 0.4,0.4
+#set multiplot layout 2,2
+#set xrange [-3.2:3.2] 
+
+set xlabel "{/Symbol q}/rad" 
+set ylabel "Energie({/Symbol q} , N) [{/Symbol m}_0/(4{/Symbol p})M^2/a^3]"
+
+
+set title "Wechselwirkungsendergie für einen Ferromagneten" 
+set key bottom right
+set output "Plots/Plot_A_Ferro.pdf"
+plot "Ergebnisse/Ergebnis_A_N=2.txt" using 1:2 title "N=2"  linestyle  "."  linecolor 1 , "Ergebnisse/Ergebnis_A_N=5.txt" using 1:2 title 'N=5' linestyle  "."  linecolor 2 , "Ergebnisse/Ergebnis_A_N=10.txt" using 1:2 title 'N=10' linestyle  "."  linecolor 3 
+
+set title "Wechselwirkungsendergie für einen Antiferromagneten"
+set key top right
+set output "Plots/Plot_A_Anti.pdf"
+plot "Ergebnisse/Ergebnis_A_N=2.txt" using 1:3 title 'N=2' linestyle  "."  linecolor 1 , "Ergebnisse/Ergebnis_A_N=5.txt" using 1:3 title 'N=5' linestyle  "."  linecolor 2 , "Ergebnisse/Ergebnis_A_N=10.txt" using 1:3 title 'N=10' linestyle  "."  linecolor 3
+
+set title "Betrag des Drehmomente für einen Ferromagneten" 
+set ylabel "Drehmoment({/Symbol q} , N) [{/Symbol m}_0/(4{/Symbol p})M^2/a^3]"
+set key top right
+set output "Plots/Plot_B_Ferro.pdf"
+plot "Ergebnisse/Ergebnis_B_N=2.txt" using 1:2 title 'N=2' linestyle  "."  linecolor 1 , "Ergebnisse/Ergebnis_B_N=5.txt" using 1:2 title 'N=5' linestyle  "."  linecolor 2 , "Ergebnisse/Ergebnis_B_N=10.txt" using 1:2 linestyle  "."  linecolor 3 title 'N=10'
+
+set key top right
+set title "Betrag des Drehmomente für einen Antiferromagneten"
+set output "Plots/Plot_B_Anti.pdf"
+plot "Ergebnisse/Ergebnis_B_N=2.txt" using 1:3 title 'N=2' linestyle  "."  linecolor 1 , "Ergebnisse/Ergebnis_B_N=5.txt" using 1:3 title 'N=5' linestyle  "."  linecolor 2 , "Ergebnisse/Ergebnis_B_N=10.txt" using 1:3 title 'N=10' linestyle  "."  linecolor 3
+
+#unset output

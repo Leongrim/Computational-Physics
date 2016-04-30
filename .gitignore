@@ -1,0 +1,8 @@
+# Ausgabedateien die erstellt werden
+*.o
+# Latex zusatzdateien
+*.aux
+*.log
+*.gz
+program*
+/Blatt-**/Notizen/Notizen.pdf

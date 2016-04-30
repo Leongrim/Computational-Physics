@@ -1,0 +1,27 @@
+% !TeX root = ../Notizen.tex
+\subsection*{a)}
+Zur numerischen Berechnung des Hauptwertintegrals wird die folgende Formel
+aus der Vorlesung angewendet:
+\begin{align}
+I_1=\mathcal{P}\int\limits_{-1}^{1}\frac{\exp(t)}{t}\text{d}t=
+\int\limits_{-1}^{-\Delta}\frac{\exp(t)}{t}\text{d}t+
+\int\limits_{\Delta}^{1}\frac{\exp(t)}{t}\text{d}t+
+\int\limits_{-1}^{1}\frac{\exp(\Delta\cdot t)-1}{t}\text{d}t
+\end{align}
+
+\subsection*{b)}
+Da die Auswertung des Integranden Singularitäten an den Grenzen aufweist,
+wird eine partielle Integration durchgeführt, die dieses Problem behebt.
+\begin{align}
+I_2=\int\limits_{0}^{\infty}\frac{\exp(-t)}{\sqrt{t}}\text{d} t=
+\underbrace{\left\exp(-t)\cdot\frac{1}{-\frac{1}{2}+1}\cdot\sqrt{t}\right
+\vert_{0}^{\infty}}_{=0}-\int\limits_{0}^{\infty}-\exp(-t)\cdot
+ 2\sqrt{t}\text{d}t
+\end{align}
+Analytisch ergibt sich die Gammafunktion:
+\begin{align}
+I_2=\int\limits_{0}^{\infty}\frac{\exp(-t)}{\sqrt{t}}\text{d} t=
+\Gamma\left(\frac{1}{2}\right)=\sqrt{\pi}
+\end{align}
+mithilfe des Ergänzungssatzes
+$\Gamma(x)\cdot\Gamma(1-x)=\frac{\pi}{\sin(\pi x)}$ mit $x=\frac{1}{2}$.
