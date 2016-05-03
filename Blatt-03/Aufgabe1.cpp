@@ -2,8 +2,9 @@
 #include "fstream"
 #include <cmath>
 #include <vector>
+#include </home/leonard/FP_Repo2016/Computational-Physics/Blatt-03/Aufgabe1.h>
 
-double* Harmo( double* Ort ){
+/*double* Harmo( double* Ort ){
 	double *Pointer = new double [3];
 	for (int i = 0; i < 3; ++i)
 	{
@@ -11,10 +12,18 @@ double* Harmo( double* Ort ){
 	}
 	return Pointer;
 }
+double* Kepler( double* Ort){
+	double *Pointer = new double [3];
+	double Norm = sqrt( Ort[1]*Ort[1] + Ort[2]*Ort[2] + Ort[3]*Ort[3]);
+	for (int i = 0; i < 3  ; ++i)
+	{
+		Pointer[i] = -Ort[i]/(Norm*Norm*Norm);
+	}
+	return Pointer;
+}
 
-void Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* Kraftfeld(double*) , std::fstream& Datei ){
+void Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* Kraftfeld(double*) , std::fstream& Datei , double Breite = 0.001){
 	double *Y_n = new double[7];
-	double Breite = 0.001;
 	int Anzahl = (int) Zeit / Breite;
 	for (int i = 0; i < 3; ++i)
 	{
@@ -99,7 +108,7 @@ void Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* 
 		}
 		Datei << std::endl;
 	}
-}
+}*/
 
 
 int main(){
@@ -135,8 +144,18 @@ int main(){
 	Runge_Kutta( 10 , Start_Ort , Start_Geschwindigkeit , Harmo , Datei);
 	Datei.close();
 
+	Datei.open( "Ergebnisse/Ergebnis_4_A.txt" , std::ios::trunc | std::ios::out);
 
+	Start_Ort[0] = 1.0;
+	Start_Ort[1] = 0.0;
+	Start_Ort[2] = 0.0;
 
+	Start_Geschwindigkeit[0] = 0.1;
+	Start_Geschwindigkeit[1] = 0.1;
+	Start_Geschwindigkeit[2] = 0.0;
+
+	Runge_Kutta( 100 , Start_Ort , Start_Geschwindigkeit , Kepler , Datei , 0.00001);
+	Datei.close();
 
 	return 0;
 }
