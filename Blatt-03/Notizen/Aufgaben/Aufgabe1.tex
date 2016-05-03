@@ -1,4 +1,32 @@
 % !TeX root = ../Notizen.tex
 
-\section*{Aufgabe1: }
-\subsection*{a)}
+\section*{Aufgabe1: Runge-Kutta 4. Ordnung}
+In dieser Aufgabe soll das Runge-Kutta Verfahren in 4. Ordnung implementiert werden, für ein beliebiges Kraftfeld.
+Dabei soll gelten
+\begin{align}
+	\dot{\vec{r}}=&\vec{v}\\
+	\dot{\vec{v}}=&\frac{1}{m}\vec{F}(\vec{r}).
+\end{align}
+Das Runge-Kutta Verfahren ist löst Differentialgleichungssysteme Erste Ordnung. Dazu wird das Problem umgeschrieben in
+\begin{align}
+	\vec{y}&\equiv
+	\begin{pmatrix}
+	y_1=y\\ y_2\\ \vdots\\y_{n-1}=y^{(n-1)}\\ y_n=y^{(n)}
+	\end{pmatrix}=
+	\begin{pmatrix}
+		y_2\\y_3\\\vdots\\y_n\\f(x,y_1,y_2,\cdots,y_n)
+	\end{pmatrix}
+	\equiv\vec{f}(x,\vec{y}).
+\end{align}
+In dem Vorliegenden Problem wird mit
+\begin{align}
+	\dot{\vec{y}}=\begin{pmatrix}
+		\dot{\vec{r}}\\\dot{\vec{v}}
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+	\vec{v}\\\vec{F}(\vec{r})	
+	\end{pmatrix}
+	=\vec{f}(t,\vec{y})
+\end{align}
+gearbeitet.
