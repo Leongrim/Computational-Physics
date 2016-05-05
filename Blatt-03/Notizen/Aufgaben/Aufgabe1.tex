@@ -30,3 +30,26 @@ In dem Vorliegenden Problem wird mit
 	=\vec{f}(t,\vec{y})
 \end{align}
 gearbeitet.
+Für diskrete Zeiten $T= N\cdot h$ löst das Verfahren das Gleichungssystem mithilfe der Trapezregel zur Integration.
+Daraus entsteht die Regression
+\begin{align}
+	\vec{k}_1&=h\cdot \vec{f}(t_n , \vec{y}_n)\\
+	\vec{k}_2&=h\cdot \vec{f}\left(t_{n+^1\!/\!_2},\vec{y}_n+\frac{1}{2}\vec{k}_1\right)\\
+	\vec{k}_3&=h\cdot \vec{f}\left(t_{n+^1\!/\!_2},\vec{y}_n+\frac{1}{2}\vec{k}_2\right)\\
+	\vec{k}_4&=h\cdot \vec{f}\left(t_{n+1},\vec{y}_n+\vec{k}_3\right)\\
+	\vec{y}_{n+1}&=\vec{y}_n + \frac{1}{6}\left[ \vec{k}_1 + 2 \vec{k}_2 +2\vec{k}_3 +\vec{k}_4 \right]
+\end{align} 
+mit den Startwert
+\begin{align}
+	\vec{y}_0=
+	\begin{pmatrix}
+		\vec{r}_0\\\vec{v}_0.
+	\end{pmatrix}
+\end{align}
+Der Funktion zur Lösung der Differentialgleichung wird eine Endzeit übergeben, die Startvektoren $\vec{r}_0$ und $\vec{v}_0$ sowie die Intervallbreite $h$. Gegebenfalls kann ihr noch eine Datei übergeben werden in den die Werte eingespeichert werden, andernfalls gibt sie einen Vektor aus
+\begin{align}
+	y_N = 
+	\begin{pmatrix}
+		\vec{r}_N\\\vec{v}_N\\ t_N.
+	\end{pmatrix}
+\end{align}
