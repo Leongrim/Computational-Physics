@@ -1,5 +1,6 @@
 # Ausgabedateien die erstellt werden
 *.o
+*.txt
 # Latex zusatzdateien
 *.aux
 *.log
