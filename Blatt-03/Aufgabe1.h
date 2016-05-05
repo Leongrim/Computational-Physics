@@ -4,7 +4,7 @@
 
 void Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* Kraftfeld(double*) , std::fstream& Datei , double Breite = 0.001){
 	double *Y_n = new double[7];
-	int Anzahl = (int) (Zeit / Breite);
+	double Anzahl =  (Zeit / Breite);
 	for (int i = 0; i < 3; ++i)
 	{
 		Y_n[i] = Ort[i];
@@ -23,7 +23,7 @@ void Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* 
 		Datei << Y_n[i] << '\t';
 	}
 	Datei << std::endl;
-	for (int Zaehler = 1; Zaehler <= Anzahl; ++Zaehler)
+	for (double Zaehler = 1; Zaehler <= Anzahl; ++Zaehler)
 	{
 		for (int Komponente = 0; Komponente < 3; ++Komponente)
 		{
