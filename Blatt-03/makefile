@@ -2,30 +2,38 @@ CC = g++
 PY = python
 CFLAGS = -std=c++11 -Wall -O3 -march=native -c
 LDFLAGS =
-#AUFGABE1_SOURCES = Aufgabe1.cpp
 AUFGABE2_SOURCES = Aufgabe2.cpp
 AUFGABE4_SOURCES = Aufgabe4.cpp
+AUFGABE5_SOURCES = Aufgabe5.cpp
 
 #AUFGABE1_OBJECTS = $(AUFGABE1_SOURCES:.cpp=.o)
 AUFGABE2_OBJECTS = $(AUFGABE2_SOURCES:.cpp=.o)
 AUFGABE4_OBJECTS = $(AUFGABE4_SOURCES:.cpp=.o)
+AUFGABE5_OBJECTS = $(AUFGABE5_SOURCES:.cpp=.o)
 
 #EXECUTABLE = program1
 AUFGABE2_EXECUTABLE = program2
 AUFGABE4_EXECUTABLE = program4
+AUFGABE5_EXECUTABLE = program5
 
-.PHONY: all aufgabe2 aufgabe4
+.PHONY: all aufgabe2 aufgabe4 aufgabe5
 
-all: aufgabe2 aufgabe4
+all: Aufgabe1.h aufgabe2 aufgabe4 aufgabe5
 
 aufgabe2: $(AUFGABE2_EXECUTABLE)
 aufgabe4: $(AUFGABE4_EXECUTABLE)
+aufgabe5: $(AUFGABE5_EXECUTABLE)
 
-$(AUFGABE2_EXECUTABLE): $(AUFGABE2_OBJECTS)
-	$(CC) -o $@ $(AUFGABE2_OBJECTS) $(LDFLAGS)  
 
-$(AUFGABE4_EXECUTABLE): $(AUFGABE4_OBJECTS)
-	$(CC) -o $@ $(AUFGABE4_OBJECTS) $(LDFLAGS) 
+
+$(AUFGABE2_EXECUTABLE): $(AUFGABE2_OBJECTS) Aufgabe1.h
+	$(CC) -o $@ $(AUFGABE2_OBJECTS) $(LDFLAGS) -I ../Blatt-03
+
+$(AUFGABE4_EXECUTABLE): $(AUFGABE4_OBJECTS) Aufgabe1.h
+	$(CC) -o $@ $(AUFGABE4_OBJECTS) $(LDFLAGS) -I ../Blatt-03
+
+$(AUFGABE5_EXECUTABLE): $(AUFGABE5_OBJECTS) Aufgabe1.h
+	$(CC) -o $@ $(AUFGABE5_OBJECTS) $(LDFLAGS) -I ../Blatt-03
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
