@@ -99,16 +99,25 @@ int main(){
 
 	Datei.close();
 	Datei.open("Ergebnisse/Ergebnis_4_Kepler_3_1.txt" , std::ios::trunc | std::ios::out);
-	for (int i = 0; i < 1000 ; ++i)// Schleife mit der die Umlaufzeit bestimmmt wird, sowie die Y-Achsenabschnitte, zur bestimmung der Länge der Hauptachse.
+	for (int i = 0; i < 1000 ; ++i)// Schleife mit der die Umlaufzeit bestimmmt wird
 	{
-		if (std::abs( Bahn[i][0] ) < 5e-2){
-			Datei << "X=0: " << (double) i*Breite << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
-		}
 		if(std::abs(Bahn[i][0]-1) < 1e-1 && std::abs(Bahn[i][1]) < 1e-1){
 			Datei << "ZEIT:" << (double) i*Breite<< '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
 		}
 
 	}
+	double temp = 0.0;
+	for (int i = 0; i < 1000; ++i)//Schleife um die Halbachse zubestimmen
+	{
+		for (int j = 0; j < 1000; ++j)
+		{
+			Norm = sqrt( (Bahn[i][0]-Bahn[j][0])*(Bahn[i][0]-Bahn[j][0]) + (Bahn[i][1]-Bahn[j][1])*(Bahn[i][1]-Bahn[j][1]) + (Bahn[i][2]-Bahn[j][2])*(Bahn[i][2]-Bahn[j][2])   );
+			if(Norm > temp)	{
+				temp = Norm;
+			}
+		}
+	}
+	std::cout << "Große Halbachse für Bahn 1= "<< temp << std::endl;
 	Datei.close();
 	Datei.open("Ergebnisse/Ergebnis_4_Kepler_3_2.txt" , std::ios::trunc | std::ios::out);
 	Start_Ort[0] = 1.0;
@@ -126,11 +135,20 @@ int main(){
 			Bahn[k][j] = Runge_Kutta( (k)*Breite , Start_Ort , Start_Geschwindigkeit , Kepler , Breite)[j];
 		}
 	}
-	for (int i = 0; i < 1000 ; ++i)// Schleife mit der die Umlaufzeit bestimmmt wird, sowie die Y-Achsenabschnitte, zur bestimmung der Länge der Hauptachse.
+	temp = 0.0;
+	for (int i = 0; i < 1000; ++i)//Schleife um die Halbachse zubestimmen
 	{
-		if (std::abs( Bahn[i][0] ) < 5e-2){
-			Datei << "X=0: " << (double) i*Breite << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
+		for (int j = 0; j < 1000; ++j)
+		{
+			Norm = sqrt( (Bahn[i][0]-Bahn[j][0])*(Bahn[i][0]-Bahn[j][0]) + (Bahn[i][1]-Bahn[j][1])*(Bahn[i][1]-Bahn[j][1]) + (Bahn[i][2]-Bahn[j][2])*(Bahn[i][2]-Bahn[j][2])  );
+			if(Norm > temp)	{
+				temp = Norm;
+			}
 		}
+	}
+	std::cout << "Große Halbachse für Bahn 2= " << temp << std::endl;
+	for (int i = 0; i < 1000 ; ++i)// Schleife mit der die Umlaufzeit bestimmmt wird
+	{
 		if(std::abs(Bahn[i][0]-1) < 1e-1 && std::abs(Bahn[i][1]) < 1e-1){
 			Datei << "ZEIT:" << (double) i*Breite<< '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
 		}
