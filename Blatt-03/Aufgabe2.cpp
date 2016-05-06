@@ -4,7 +4,7 @@
 #include <vector>
 #include "Aufgabe1.h"
 
-double* Harmo( double* Ort ){ // Kraftfeld um die KuttaRunge Funktion zu testen. Liefert einen Harmonischen Oszilator als Ergebnis
+double* Harmo( double* Ort ){ // Kraftfeld, um die Runge-Kutta-Funktion zu testen. Liefert einen Harmonischen Oszilator als Ergebnis
 	double *Pointer = new double [3];
 	for (int i = 0; i < 3; ++i)
 	{
@@ -50,7 +50,7 @@ int main()
 	double* Geschwindigkeit = new double[3];
 	double Energie_1 = 0.0;
 	double Energie = 0.0;
-	for (int i = 1; i < 100; ++i) // Schleife um die Energiedifferenz zur vorhergehenden Energie zu bestimmen
+	for (int i = 1; i < 100; ++i) // Schleife, um die Energiedifferenz zur vorhergehenden Energie zu bestimmen
 	{
 		for (int j = 0; j < 3; ++j)
 		{
@@ -82,7 +82,7 @@ int main()
 	double Temp = 0;
 	double Schrittweite = 100.0;
 
-	for (double Breite = 1; Breite < Schrittweite; ++Breite) // Schleife um das Letze Maximum zu bestimmen
+	for (double Breite = 1; Breite < Schrittweite; ++Breite) // Schleife, um das letze Maximum zu bestimmen
 	{
 		Temp = 0.0;
 		for (double Zeit = 1; Zeit < 100 ; ++Zeit)
