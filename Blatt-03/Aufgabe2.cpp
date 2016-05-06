@@ -2,7 +2,7 @@
 #include "fstream"
 #include <cmath>
 #include <vector>
-#include </home/leonard/FP_Repo2016/Computational-Physics/Blatt-03/Aufgabe1.h>
+#include "Aufgabe1.h"
 
 double* Harmo( double* Ort ){
 	double *Pointer = new double [3];
