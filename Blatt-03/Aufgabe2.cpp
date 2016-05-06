@@ -45,7 +45,7 @@ int main()
 	Datei.close();
 
 
-	/*Datei.open( "Ergebnisse/Ergebnis_2_B_Energie.txt" , std::ios::trunc | std::ios::out);
+	Datei.open( "Ergebnisse/Ergebnis_2_B_Energie.txt" , std::ios::trunc | std::ios::out);
 	double* Ort = new double[3];
 	double* Geschwindigkeit = new double[3];
 	double Energie_1 = 0.0;
@@ -64,7 +64,7 @@ int main()
 		Energie_1 = Energie;
 		Energie = 0;
 	}
-	Datei.close();*/
+	Datei.close();
 
 
 	Datei.open( "Ergebnisse/Ergebnis_2_B_Stabilitaet.txt" , std::ios::trunc | std::ios::out);
@@ -80,7 +80,7 @@ int main()
 	double Wert_1;
 	double Wert_Zeit;
 	double Temp = 0;
-	double Schrittweite = 400.0;
+	double Schrittweite = 100.0;
 
 	for (double Breite = 1; Breite < Schrittweite; ++Breite)
 	{
@@ -95,8 +95,12 @@ int main()
 			}
 		}
 		Datei << Breite/Schrittweite << '\t' << Temp << '\t' << Wert_Zeit << std::endl;
-		
 	}
+	Datei.close();
+	delete[] Start_Geschwindigkeit;
+	delete[] Start_Ort;
+	delete[] Ort;
+	delete[] Geschwindigkeit;
 	
 	return 0;
 }
