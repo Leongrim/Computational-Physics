@@ -80,6 +80,25 @@ treffen, dessen Betrag in \cref{fig:Dreh} ebenfalls gegen die Zeit $t$ aufgetrag
 	\includegraphics[width = \textwidth]{../Plots/Plot_4_Dreh.pdf}
 	\caption{Drehimpulsdifferenz $\Delta L$ für verschiedene Zeiten $t$.\label{fig:Dreh}}
 \end{figure}
+Weiter soll noch das dritte Kepler-Gesetzt überprüft werden, nach dem ist
+\begin{align}
+	\frac{a_1^3}{T_1^2}=\frac{a_2^3}{T_2^2}
+\end{align}
+Darin sind $a_I$ die Länge der großen Halbachsen und $T_i$ die Umlaufzeiten, für 2 verschiedene Bahnen.
+Bestimmt wurden die Werte aus \cref{tab:kepler}. Dabei wurde für die Umlaufzeit die Werte Verwendet, bei denen die Bahn in einen Bereich von $|x-x_0|<\pm10^{-1}$ und $|y-y_0|=\pm10^{1}$ zum Ausgangspunkt kamen. Dabei wurde der Mittelwert von 8 Datenpunkten berechnet. Für die große Halbachse wird der größte Abstand zweier Punkte auf den Bahnen verwendet. 
+Daraus folgt
+\begin{align}
+	\left|\frac{a_1^3}{T_1^2}-\frac{a_2^3}{T_2^2}\right|\approx 0,07005
+\end{align}
+Dabei wurden die Planetenbahnen wie in \cref{fig:Bahn} dargestellt verwendet.
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{c|c|c}
+		Umlaufzeit & Länge der großen Halbachse&$a^3/T^2$ \\\hline
+		9,86771 & 2,66653 & 0,19472\\
+		5,58021 & 2,02019 & 0,26477
+	\end{tabular}\caption{\label{tab:kepler}}
+\end{table}
 
 \subsection*{c)}
 Genau wie in Aufgabenteil b) wird nun die Erhaltung des Lenz-Runge-Vektors $\vec{\Lambda}$ überprüft.
@@ -92,7 +111,7 @@ Er berechnet sich nach
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \textwidth]{../Plots/Plots_4_LR.pdf}
-	\caption{Lenz-Runge-Vektor $\Lambda$ für verschiedene Zeiten $t$.\label{fig:LR}}
+	\caption{Änderung des Betrages des Lenz-Runge-Vektor $\Lambda$ für verschiedene Zeiten $t$.\label{fig:LR}}
 \end{figure}
 Auffällig ist hier das Maximum um etwa \SI{10}{s}.
 Trotzdem lässt sich die Aussage treffen, dass auch der Lenz-Runge-Vektor im Wesentlichen erhalten ist.\\
@@ -106,15 +125,24 @@ Abgesehen von kleinen numerischen Abweichungen stimmen diese gut überein.
 (Siehe Ausgabe des Programms)
 
 \subsection*{e)}
+In diesem Aufgabenteil sollen die Bahnen für Potenziale der Art
+\begin{align}
+	V(\vec{r})=-\frac{mG}{r^\alpha}
+\end{align}
+untersucht werden. 
+Dabei werden speziell die Betrachtet mit $\alpha=0.1$ und $\alpha=1.1$
+Es Lässt sich erkennen das die Teilchenbahnen anfangen zu Rotieren.
+Dies hat für den Lenz-Runge-Vektor die Konsequenz, dass er nicht mehr eine Erhaltungsgröße ist.
+Die Teilchenbahnen sind in \cref{fig:E1} und \cref{fig:E2} dargestellt, es sind ebenfalls je 2 Lenz-Runge-Vektoren eingezeichnet.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \textwidth]{../Plots/Plot_4_E_1.pdf}
-	\caption{Lenz-Runge-Vektor $\Lambda$ für verschiedene Zeiten $t$.\label{fig:E1}}
+	\caption{Eine Teilchenbahn für das Potential$\propto^1\!/_{r^{0,9}}$.\label{fig:E1}}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \textwidth]{../Plots/Plot_4_E_2.pdf}
-	\caption{Lenz-Runge-Vektor $\Lambda$ für verschiedene Zeiten $t$.\label{fig:E2}}
+	\caption{Eine Teilchen Bahn für das Potential$\propto^1\!/_{r^{1,1}}$.\label{fig:E2}}
 \end{figure}
