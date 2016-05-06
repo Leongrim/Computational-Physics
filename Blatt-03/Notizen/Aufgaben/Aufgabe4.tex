@@ -55,6 +55,7 @@ Für kleine Anfangsgeschwindigkeiten fällt das Teilchen in den Ursprung und bek
 		\caption{Planetenbahn für $h=0,7$.\label{fig:Bahn2}}
 	\end{subfigure}\\
 \end{figure}
+
 \subsection*{b)}
 Als nächstes soll überprüft werden, ob die Energie in dem System erhalten ist.
 Sie ist definiert als
@@ -62,9 +63,58 @@ Sie ist definiert als
 	E:=\frac{1}{2}v^2-\frac{mG}{r}
 \end{align}
 Hier wird wieder die Energiedifferenz $\Delta E$ für unterschiedliche Zeiten $t$ betrachtet.
-Aus ihrer Größenordnung von $e-6$ ist ersichtlich, dass die Energie wieder im Wesentlichen erhalten ist.
+Aus ihrer Größenordnung von $10^{-6}$ ist ersichtlich, dass die Energie wieder im Wesentlichen erhalten ist.
+In \cref{fig:Energie} ist die Energiedifferenz $\Delta E$ gegen die Zeit $t$ aufgetragen.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \textwidth]{../Plots/Plot_4_Energie.pdf}
 	\caption{Energiedifferenz $\Delta E$ für verschiedene Zeiten $t$.\label{fig:Energie}}
+\end{figure}
+Analog lässt sich dieselbe Aussage für den Drehimpuls
+\begin{align}
+\vec{L}=\vec{r}\times\vec{p}=\vec{r}\times m\vec{v}
+\end{align}
+treffen, dessen Betrag in \cref{fig:Dreh} ebenfalls gegen die Zeit $t$ aufgetragen ist.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = \textwidth]{../Plots/Plot_4_Dreh.pdf}
+	\caption{Drehimpulsdifferenz $\Delta L$ für verschiedene Zeiten $t$.\label{fig:Dreh}}
+\end{figure}
+
+\subsection*{c)}
+Genau wie in Aufgabenteil b) wird nun die Erhaltung des Lenz-Runge-Vektors $\vec{\Lambda}$ überprüft.
+Dessen Betrag ist in \cref{fig:LR} wiederum gegen die Zeit $t$ aufgetragen.
+Er berechnet sich nach
+\begin{align}
+\vec{\Lambda}=\frac{1}{Gm}\vec{p}\times\vec{L}-\frac{\vec{r}}{r}
+=\underbrace{\vec{v}\times\left(\vec{r}\times\vec{v}\right)}_{(\vec{v}\cdot\vec{v})\vec{r}-(\vec{v}\cdot\vec{r})\vec{v}}-\frac{\vec{r}}{r}~.
+\end{align}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = \textwidth]{../Plots/Plots_4_LR.pdf}
+	\caption{Lenz-Runge-Vektor $\Lambda$ für verschiedene Zeiten $t$.\label{fig:LR}}
+\end{figure}
+Auffällig ist hier das Maximum um etwa \SI{10}{s}.
+Trotzdem lässt sich die Aussage treffen, dass auch der Lenz-Runge-Vektor im Wesentlichen erhalten ist.\\
+In \cref{fig:Bahn} ist die Richtung des Lenz-Runge-Vektors eingezeichnet.
+
+\subsection*{d)}
+Um die Fehler und Stabilität der Integration zu testen, werden $N$ Runge-Kutta-Schritte gemacht und anschließend die Geschwindigkeit $\vec{v}$ umgekehrt.
+Vom erreichten Punkt aus werden dann $N$ Runge-Kutta-Schritte in die entgegengesetzte Richtung gemacht.
+Nun werden der erreichte Punkt und die dortige Geschwindigkeit mit dem Ausgangspunkt und der Ausgangsgeschwindigkeit verglichen.
+Abgesehen von kleinen numerischen Abweichungen stimmen diese gut überein.
+(Siehe Ausgabe des Programms)
+
+\subsection*{e)}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = \textwidth]{../Plots/Plot_4_E_1.pdf}
+	\caption{Lenz-Runge-Vektor $\Lambda$ für verschiedene Zeiten $t$.\label{fig:E1}}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = \textwidth]{../Plots/Plot_4_E_2.pdf}
+	\caption{Lenz-Runge-Vektor $\Lambda$ für verschiedene Zeiten $t$.\label{fig:E2}}
 \end{figure}
