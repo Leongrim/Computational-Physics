@@ -36,15 +36,14 @@ int main(){
 
 	for (int  k = 0; k < (int) 1000; ++k)
 	{
-		double i= (double) k;
 		for (int j = 0; j < 6; ++j)
 		{
-			Bahn[k][j] = Runge_Kutta( (i)/10.0 , Start_Ort , Start_Geschwindigkeit , Kepler , Breite)[j];
+			Bahn[k][j] = Runge_Kutta( (k)*Breite , Start_Ort , Start_Geschwindigkeit , Kepler , Breite)[j];
 		}
 	}
 
 	////// Lenz-Runge Vektoren
-	Datei.open( "Ergebnisse/Ergebnis_4_LR.txt" , std::ios::trunc | std::ios::out);
+	Datei.open( "Ergebnisse/Ergebnis_4_Energie.txt" , std::ios::trunc | std::ios::out);
 	double Norm;
 	double X_Komponente;
 	double Y_Komponente;
@@ -57,6 +56,7 @@ int main(){
 	double LenzRunge = 0.0;
 	double LenzRunge_1 = 0.0;
 	double produkt1 = 0.0;
+	double produkt2 = 0.0;
 
 
 
@@ -72,44 +72,79 @@ int main(){
 
 		if (i!=0)
 		{
-			Datei << Energie - Energie_1 << '\t';
+			Datei << i*Breite << '\t' << Energie - Energie_1 << '\t';
 			Datei << Dreh_0 - Dreh_1 << std::endl;
 		}
 		Energie_1 = Energie;
 		Dreh_1 = Dreh_0;
 	}
-	for (int i = 0; i < 1000; ++i)
+	Datei.close();
+	Datei.open("Ergebnisse/Ergebnis_4_LR.txt" , std::ios::trunc | std::ios::out);
+	for (int i = 0; i < 100; ++i)
 	{
 		Norm = sqrt( Bahn[i][0]*Bahn[i][0] + Bahn[i][1]*Bahn[i][1] + Bahn[i][2]*Bahn[i][2] );
 		produkt1 = Bahn[i][0]*Bahn[i][3] + Bahn[i][1]*Bahn[i][4] + Bahn[i][2]*Bahn[i][5];
 		produkt2 = Bahn[i][3]*Bahn[i][3] + Bahn[i][4]*Bahn[i][4] + Bahn[i][5]*Bahn[i][5];
-		X_Komponente = produkt1*Bahn[i][3] - produkt2*Bahn[i][0]-Bahn[i][0]/Norm;
-		Y_Komponente = produkt1*Bahn[i][4] - produkt2*Bahn[i][1]-Bahn[i][1]/Norm;
-		Z_Komponente = produkt1*Bahn[i][5] - produkt2*Bahn[i][2]-Bahn[i][2]/Norm;
+		X_Komponente = produkt2*Bahn[i][0] - produkt1 * Bahn[i][3]-Bahn[i][0]/Norm;
+		Y_Komponente = produkt2*Bahn[i][1] - produkt1 * Bahn[i][4]-Bahn[i][1]/Norm;
+		Z_Komponente = produkt2*Bahn[i][2] - produkt1 * Bahn[i][5]-Bahn[i][2]/Norm;
 		LenzRunge = sqrt( X_Komponente*X_Komponente + Y_Komponente*Y_Komponente + Z_Komponente*Z_Komponente);
 		if (i != 0)
 		{
-			
+			Datei << i << '\t' << X_Komponente << '\t' << Y_Komponente << '\t' << Z_Komponente << '\t' << LenzRunge << '\t' << std::abs(LenzRunge - LenzRunge_1) << std::endl;
 		}
 		LenzRunge_1 = LenzRunge;
 	}
-	/*for (int i = 0; i < (int) 1000 ; ++i)
+
+
+	Datei.close();
+	Datei.open("Ergebnisse/Ergebnis_4_Kepler_3_1.txt" , std::ios::trunc | std::ios::out);
+	for (int i = 0; i < 1000 ; ++i)
 	{
-		if (std::abs( Bahn[i][0] ) < 1e-1){
-			std::cout << i*Breite << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
+		if (std::abs( Bahn[i][0] ) < 5e-2){
+			Datei << "X=0: " << (double) i*Breite << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
 		}
 		if(std::abs(Bahn[i][0]-1) < 1e-1 && std::abs(Bahn[i][1]) < 1e-1){
-			std::cout << "ZEIT:" << (double) i/10 << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
+			Datei << "ZEIT:" << (double) i*Breite<< '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
 		}
 
 	}
 	Datei.close();
+	Datei.open("Ergebnisse/Ergebnis_4_Kepler_3_2.txt" , std::ios::trunc | std::ios::out);
+	Start_Ort[0] = 1.0;
+	Start_Ort[1] = 0.0;
+	Start_Ort[2] = 0.0;
+
+	Start_Geschwindigkeit[0] = -0.1;
+	Start_Geschwindigkeit[1] = 1.0;
+	Start_Geschwindigkeit[2] = 0.0;
+
+	for (int  k = 0; k < (int) 1000; ++k)
+	{
+		for (int j = 0; j < 6; ++j)
+		{
+			Bahn[k][j] = Runge_Kutta( (k)*Breite , Start_Ort , Start_Geschwindigkeit , Kepler , Breite)[j];
+		}
+	}
+	for (int i = 0; i < 1000 ; ++i)
+	{
+		if (std::abs( Bahn[i][0] ) < 5e-2){
+			Datei << "X=0: " << (double) i*Breite << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
+		}
+		if(std::abs(Bahn[i][0]-1) < 1e-1 && std::abs(Bahn[i][1]) < 1e-1){
+			Datei << "ZEIT:" << (double) i*Breite<< '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
+		}
+
+	}
+	Datei.close();
+
+
 	Datei.open( "Ergebnisse/Ergebnis_4_BAHN.txt" , std::ios::trunc | std::ios::out);
 
-	for (int i = 0; i < (int) 1000 ; ++i)
+	for (int i = 0; i < 1000 ; ++i)
 	{
-		Datei << i/10 << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << '\t' << Bahn[i][2] << std::endl;
-	}*/
+		Datei << (double)i/10 << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << '\t' << Bahn[i][2] << std::endl;
+	}
 
 	Datei.close();
 
