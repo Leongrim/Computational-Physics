@@ -4,7 +4,7 @@
 #include <vector>
 #include "Aufgabe1.h"
 
-double* Kepler( double* Ort){
+double* Kepler( double* Ort){ //Kraftfeld um Planetenbahnen zu bestimmen
 	double *Pointer = new double [3];
 	double Norm = sqrt( Ort[0]*Ort[0] + Ort[1]*Ort[1] + Ort[2]*Ort[2]);
 	for (int i = 0; i < 3  ; ++i)
@@ -13,16 +13,16 @@ double* Kepler( double* Ort){
 	}
 	return Pointer;
 }
-double* alpha09( double* Ort){
+double* alpha09( double* Ort){ // Kraftfeld zum 1/r^0.9 Potential
 	double *Pointer = new double [3];
 	double Norm = sqrt( Ort[0]*Ort[0] + Ort[1]*Ort[1] + Ort[2]*Ort[2]);
 	for (int i = 0; i < 3  ; ++i)
 	{
-		Pointer[i] = -Ort[i]/pow(Norm , 0.9);
+		Pointer[i] = -Ort[i]*Norm/Norm;
 	}
 	return Pointer;
 }
-double* alpha11( double* Ort){
+double* alpha11( double* Ort){ //Kraftfeld zum 1/r^1.1 Potential
 	double *Pointer = new double [3];
 	double Norm = sqrt( Ort[0]*Ort[0] + Ort[1]*Ort[1] + Ort[2]*Ort[2]);
 	for (int i = 0; i < 3  ; ++i)
@@ -88,7 +88,7 @@ int main(){
 	Datei.close();
 
 
-	///////////// Aufgabenteil D
+	///////////// Aufgabenteil D: Stabilitätstest. Die Stabilität wird getestet in dem der Wert nach einer Gewissen Zeit als neuer Startwert mit umgedrehter Geschwindigkeit verwendet wird. Somit läft das Teilchen die Bahn zurück und sollte nach der Gleichen Zeit wieder am Anfangspunkt mit umgedrehter ausgangsgeschwindigkeit an kommen
 
 	double *Start_Ort2 = new double [3];
 	double *Start_Geschwindigkeit2 = new double [3];

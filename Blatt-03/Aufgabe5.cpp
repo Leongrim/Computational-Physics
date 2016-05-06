@@ -34,7 +34,7 @@ int main(){
 	Start_Geschwindigkeit[1] = 1.0;
 	Start_Geschwindigkeit[2] = 0.0;
 
-	for (int  k = 0; k < (int) 1000; ++k)
+	for (int  k = 0; k < (int) 1000; ++k) //Schleife um die Bahn eines Teilchens in eine Matrix zu schreiben
 	{
 		for (int j = 0; j < 6; ++j)
 		{
@@ -60,7 +60,7 @@ int main(){
 
 
 
-	for (int i = 0; i < (int) 1000 ; ++i)
+	for (int i = 0; i < (int) 1000 ; ++i) // Aufgabenteil B: Schleife mit deren hilfe die Drehimpuls und energie Erhaltung gezeigt werden soll 
 	{	
 		Norm = sqrt( Bahn[i][0]*Bahn[i][0] + Bahn[i][1]*Bahn[i][1] + Bahn[i][2]*Bahn[i][2] );
 		produkt1 =  Bahn[i][3]*Bahn[i][3] + Bahn[i][4]*Bahn[i][4] + Bahn[i][5]*Bahn[i][5];
@@ -80,7 +80,7 @@ int main(){
 	}
 	Datei.close();
 	Datei.open("Ergebnisse/Ergebnis_4_LR.txt" , std::ios::trunc | std::ios::out);
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 100; ++i) //Aufgabenteil C: Schleife mit der die Erhaltungsgröße des Lenz-Runge-Vektors gezeigt werden soll.
 	{
 		Norm = sqrt( Bahn[i][0]*Bahn[i][0] + Bahn[i][1]*Bahn[i][1] + Bahn[i][2]*Bahn[i][2] );
 		produkt1 = Bahn[i][0]*Bahn[i][3] + Bahn[i][1]*Bahn[i][4] + Bahn[i][2]*Bahn[i][5];
@@ -99,7 +99,7 @@ int main(){
 
 	Datei.close();
 	Datei.open("Ergebnisse/Ergebnis_4_Kepler_3_1.txt" , std::ios::trunc | std::ios::out);
-	for (int i = 0; i < 1000 ; ++i)
+	for (int i = 0; i < 1000 ; ++i)// Schleife mit der die Umlaufzeit bestimmmt wird, sowie die Y-Achsenabschnitte, zur bestimmung der Länge der Hauptachse.
 	{
 		if (std::abs( Bahn[i][0] ) < 5e-2){
 			Datei << "X=0: " << (double) i*Breite << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
@@ -119,14 +119,14 @@ int main(){
 	Start_Geschwindigkeit[1] = 1.0;
 	Start_Geschwindigkeit[2] = 0.0;
 
-	for (int  k = 0; k < (int) 1000; ++k)
+	for (int  k = 0; k < (int) 1000; ++k) // Schleife mit der die Bahn eines Teilchens in eine Matrix geschrieben wird
 	{
 		for (int j = 0; j < 6; ++j)
 		{
 			Bahn[k][j] = Runge_Kutta( (k)*Breite , Start_Ort , Start_Geschwindigkeit , Kepler , Breite)[j];
 		}
 	}
-	for (int i = 0; i < 1000 ; ++i)
+	for (int i = 0; i < 1000 ; ++i)// Schleife mit der die Umlaufzeit bestimmmt wird, sowie die Y-Achsenabschnitte, zur bestimmung der Länge der Hauptachse.
 	{
 		if (std::abs( Bahn[i][0] ) < 5e-2){
 			Datei << "X=0: " << (double) i*Breite << '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
