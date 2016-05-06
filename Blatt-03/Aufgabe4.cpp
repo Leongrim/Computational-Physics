@@ -18,7 +18,7 @@ double* alpha09( double* Ort){ // Kraftfeld zum 1/r^0.9 Potential
 	double Norm = sqrt( Ort[0]*Ort[0] + Ort[1]*Ort[1] + Ort[2]*Ort[2]);
 	for (int i = 0; i < 3  ; ++i)
 	{
-		Pointer[i] = -Ort[i]*Norm/Norm;
+		Pointer[i] = -Ort[i]/pow(Norm , 0.9);
 	}
 	return Pointer;
 }
@@ -142,6 +142,71 @@ int main(){
 
 	Datei.open( "Ergebnisse/Ergebnis_4_E_2.txt" , std::ios::trunc | std::ios::out );
 	Runge_Kutta( 20 , Start_Ort , Start_Geschwindigkeit , alpha11 , Datei , 0.01);
+	Datei.close();
+
+	Datei.open( "Ergebnisse/Ergebnis_4_E_Lenzrunge_1.txt" , std::ios::trunc | std::ios::out);
+	double Bahn[1000][6];
+	double X_Komponente;
+	double Y_Komponente;
+	double Z_Komponente;
+	double Norm;
+	double produkt1;
+	double produkt2;
+	double LenzRunge = 0.0;
+	double LenzRunge_1 = 0.0;
+	double Breite = 0.1;
+
+	for (int  k = 0; k < (int) 1000; ++k) //Schleife um die Bahn eines Teilchens in eine Matrix zu schreiben
+	{
+		for (int j = 0; j < 6; ++j)
+		{
+			Bahn[k][j] = Runge_Kutta( (k)*Breite , Start_Ort , Start_Geschwindigkeit , alpha09 , Breite)[j];
+		}
+	}
+
+
+	for (int i = 0; i < 100; ++i) //Aufgabenteil C: Schleife mit der die Erhaltungsgröße des Lenz-Runge-Vektors gezeigt werden soll.
+	{
+		Norm = sqrt( Bahn[i][0]*Bahn[i][0] + Bahn[i][1]*Bahn[i][1] + Bahn[i][2]*Bahn[i][2] );
+		produkt1 = Bahn[i][0]*Bahn[i][3] + Bahn[i][1]*Bahn[i][4] + Bahn[i][2]*Bahn[i][5];
+		produkt2 = Bahn[i][3]*Bahn[i][3] + Bahn[i][4]*Bahn[i][4] + Bahn[i][5]*Bahn[i][5];
+		X_Komponente = produkt2*Bahn[i][0] - produkt1 * Bahn[i][3]-Bahn[i][0]/Norm;
+		Y_Komponente = produkt2*Bahn[i][1] - produkt1 * Bahn[i][4]-Bahn[i][1]/Norm;
+		Z_Komponente = produkt2*Bahn[i][2] - produkt1 * Bahn[i][5]-Bahn[i][2]/Norm;
+		LenzRunge = sqrt( X_Komponente*X_Komponente + Y_Komponente*Y_Komponente + Z_Komponente*Z_Komponente);
+		if (i != 0)
+		{
+			Datei << i << '\t' << X_Komponente << '\t' << Y_Komponente << '\t' << Z_Komponente << '\t' << LenzRunge << '\t' << std::abs(LenzRunge - LenzRunge_1) << std::endl;
+		}
+		LenzRunge_1 = LenzRunge;
+	}
+	Datei.close();
+
+	Datei.open( "Ergebnisse/Ergebnis_4_E_Lenzrunge_2.txt" , std::ios::trunc | std::ios::out);
+	for (int  k = 0; k < (int) 1000; ++k) //Schleife um die Bahn eines Teilchens in eine Matrix zu schreiben
+	{
+		for (int j = 0; j < 6; ++j)
+		{
+			Bahn[k][j] = Runge_Kutta( (k)*Breite , Start_Ort , Start_Geschwindigkeit , alpha11 , Breite)[j];
+		}
+	}
+
+
+	for (int i = 0; i < 100; ++i) //Aufgabenteil C: Schleife mit der die Erhaltungsgröße des Lenz-Runge-Vektors gezeigt werden soll.
+	{
+		Norm = sqrt( Bahn[i][0]*Bahn[i][0] + Bahn[i][1]*Bahn[i][1] + Bahn[i][2]*Bahn[i][2] );
+		produkt1 = Bahn[i][0]*Bahn[i][3] + Bahn[i][1]*Bahn[i][4] + Bahn[i][2]*Bahn[i][5];
+		produkt2 = Bahn[i][3]*Bahn[i][3] + Bahn[i][4]*Bahn[i][4] + Bahn[i][5]*Bahn[i][5];
+		X_Komponente = produkt2*Bahn[i][0] - produkt1 * Bahn[i][3]-Bahn[i][0]/Norm;
+		Y_Komponente = produkt2*Bahn[i][1] - produkt1 * Bahn[i][4]-Bahn[i][1]/Norm;
+		Z_Komponente = produkt2*Bahn[i][2] - produkt1 * Bahn[i][5]-Bahn[i][2]/Norm;
+		LenzRunge = sqrt( X_Komponente*X_Komponente + Y_Komponente*Y_Komponente + Z_Komponente*Z_Komponente);
+		if (i != 0)
+		{
+			Datei << i << '\t' << X_Komponente << '\t' << Y_Komponente << '\t' << Z_Komponente << '\t' << LenzRunge << '\t' << std::abs(LenzRunge - LenzRunge_1) << std::endl;
+		}
+		LenzRunge_1 = LenzRunge;
+	}
 	Datei.close();
 
 	return 0;
