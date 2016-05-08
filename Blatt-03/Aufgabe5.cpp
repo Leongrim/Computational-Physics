@@ -34,7 +34,7 @@ int main(){
 	Start_Geschwindigkeit[1] = 1.0;
 	Start_Geschwindigkeit[2] = 0.0;
 
-	for (int  k = 0; k < (int) 1000; ++k) //Schleife um die Bahn eines Teilchens in eine Matrix zu schreiben
+	for (int  k = 0; k < (int) 1000; ++k) //Schleife, um die Bahn eines Teilchens in eine Matrix zu schreiben
 	{
 		for (int j = 0; j < 6; ++j)
 		{
@@ -60,7 +60,7 @@ int main(){
 
 
 
-	for (int i = 0; i < (int) 1000 ; ++i) // Aufgabenteil B: Schleife mit deren hilfe die Drehimpuls und energie Erhaltung gezeigt werden soll 
+	for (int i = 0; i < (int) 1000 ; ++i) // Aufgabenteil b): Schleife, mit deren Hilfe die Drehimpuls- und Energieerhaltung gezeigt werden soll 
 	{	
 		Norm = sqrt( Bahn[i][0]*Bahn[i][0] + Bahn[i][1]*Bahn[i][1] + Bahn[i][2]*Bahn[i][2] );
 		produkt1 =  Bahn[i][3]*Bahn[i][3] + Bahn[i][4]*Bahn[i][4] + Bahn[i][5]*Bahn[i][5];
@@ -80,7 +80,7 @@ int main(){
 	}
 	Datei.close();
 	Datei.open("Ergebnisse/Ergebnis_4_LR.txt" , std::ios::trunc | std::ios::out);
-	for (int i = 0; i < 100; ++i) //Aufgabenteil C: Schleife mit der die Erhaltungsgröße des Lenz-Runge-Vektors gezeigt werden soll.
+	for (int i = 0; i < 100; ++i) //Aufgabenteil c): Schleife, mit der die Erhaltung des Lenz-Runge-Vektors gezeigt werden soll.
 	{
 		Norm = sqrt( Bahn[i][0]*Bahn[i][0] + Bahn[i][1]*Bahn[i][1] + Bahn[i][2]*Bahn[i][2] );
 		produkt1 = Bahn[i][0]*Bahn[i][3] + Bahn[i][1]*Bahn[i][4] + Bahn[i][2]*Bahn[i][5];
@@ -99,7 +99,7 @@ int main(){
 
 	Datei.close();
 	Datei.open("Ergebnisse/Ergebnis_4_Kepler_3_1.txt" , std::ios::trunc | std::ios::out);
-	for (int i = 0; i < 1000 ; ++i)// Schleife mit der die Umlaufzeit bestimmmt wird
+	for (int i = 0; i < 1000 ; ++i)// Schleife, mit der die Umlaufzeit bestimmmt wird
 	{
 		if(std::abs(Bahn[i][0]-1) < 1e-1 && std::abs(Bahn[i][1]) < 1e-1){
 			Datei << "ZEIT:" << (double) i*Breite<< '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;
@@ -107,7 +107,7 @@ int main(){
 
 	}
 	double temp = 0.0;
-	for (int i = 0; i < 1000; ++i)//Schleife um die Halbachse zubestimmen
+	for (int i = 0; i < 1000; ++i)//Schleife, um die Halbachse zu bestimmen
 	{
 		for (int j = 0; j < 1000; ++j)
 		{
@@ -128,7 +128,7 @@ int main(){
 	Start_Geschwindigkeit[1] = 1.0;
 	Start_Geschwindigkeit[2] = 0.0;
 
-	for (int  k = 0; k < (int) 1000; ++k) // Schleife mit der die Bahn eines Teilchens in eine Matrix geschrieben wird
+	for (int  k = 0; k < (int) 1000; ++k) // Schleife, mit der die Bahn eines Teilchens in eine Matrix geschrieben wird
 	{
 		for (int j = 0; j < 6; ++j)
 		{
@@ -136,7 +136,7 @@ int main(){
 		}
 	}
 	temp = 0.0;
-	for (int i = 0; i < 1000; ++i)//Schleife um die Halbachse zubestimmen
+	for (int i = 0; i < 1000; ++i)//Schleife, um die Halbachse zubestimmen
 	{
 		for (int j = 0; j < 1000; ++j)
 		{
@@ -147,7 +147,7 @@ int main(){
 		}
 	}
 	std::cout << "Große Halbachse für Bahn 2= " << temp << std::endl;
-	for (int i = 0; i < 1000 ; ++i)// Schleife mit der die Umlaufzeit bestimmmt wird
+	for (int i = 0; i < 1000 ; ++i)// Schleife, mit der die Umlaufzeit bestimmmt wird
 	{
 		if(std::abs(Bahn[i][0]-1) < 1e-1 && std::abs(Bahn[i][1]) < 1e-1){
 			Datei << "ZEIT:" << (double) i*Breite<< '\t' << Bahn[i][0] << '\t' << Bahn[i][1] << std::endl;

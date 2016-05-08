@@ -4,7 +4,7 @@
 #include <vector>
 #include "Aufgabe1.h"
 
-double* Kepler( double* Ort){ //Kraftfeld um Planetenbahnen zu bestimmen
+double* Kepler( double* Ort){ //Kraftfeld, um Planetenbahnen zu bestimmen
 	double *Pointer = new double [3];
 	double Norm = sqrt( Ort[0]*Ort[0] + Ort[1]*Ort[1] + Ort[2]*Ort[2]);
 	for (int i = 0; i < 3  ; ++i)
@@ -36,7 +36,7 @@ int main(){
 
 	std::fstream Datei;
 
-	////////////////////////////////// Aufgaben Teil A
+	////////////////////////////////// Aufgabenteil a)
 
 	double *Start_Ort = new double [3];
 	double *Start_Geschwindigkeit = new double [3];
@@ -88,7 +88,7 @@ int main(){
 	Datei.close();
 
 
-	///////////// Aufgabenteil D: Stabilitätstest. Die Stabilität wird getestet in dem der Wert nach einer Gewissen Zeit als neuer Startwert mit umgedrehter Geschwindigkeit verwendet wird. Somit läft das Teilchen die Bahn zurück und sollte nach der Gleichen Zeit wieder am Anfangspunkt mit umgedrehter ausgangsgeschwindigkeit an kommen
+	///////////// Aufgabenteil d): Stabilitätstest. Die Stabilität wird getestet, indem der Wert nach einer gewissen Zeit als neuer Startwert mit umgedrehter Geschwindigkeit verwendet wird. Somit läuft das Teilchen die Bahn zurück und sollte nach der gleichen Zeit wieder am Anfangspunkt mit umgedrehter Ausgangsgeschwindigkeit ankommen.
 
 	double *Start_Ort2 = new double [3];
 	double *Start_Geschwindigkeit2 = new double [3];
@@ -135,7 +135,7 @@ int main(){
 
 
 
-	//////////////////// Aufgaben Teil E
+	//////////////////// Aufgabenteil e)
 	Datei.open( "Ergebnisse/Ergebnis_4_E_1.txt" , std::ios::trunc | std::ios::out );
 	Runge_Kutta( 20 , Start_Ort , Start_Geschwindigkeit , alpha09 , Datei , 0.01);
 	Datei.close();
@@ -156,7 +156,7 @@ int main(){
 	double LenzRunge_1 = 0.0;
 	double Breite = 0.1;
 
-	for (int  k = 0; k < (int) 1000; ++k) //Schleife um die Bahn eines Teilchens in eine Matrix zu schreiben
+	for (int  k = 0; k < (int) 1000; ++k) //Schleife, um die Bahn eines Teilchens in eine Matrix zu schreiben
 	{
 		for (int j = 0; j < 6; ++j)
 		{
@@ -165,7 +165,7 @@ int main(){
 	}
 
 
-	for (int i = 0; i < 100; ++i) //Aufgabenteil C: Schleife mit der die Erhaltungsgröße des Lenz-Runge-Vektors gezeigt werden soll.
+	for (int i = 0; i < 100; ++i) //Aufgabenteil c): Schleife, mit der die Erhaltung des Lenz-Runge-Vektors gezeigt werden soll.
 	{
 		Norm = sqrt( Bahn[i][0]*Bahn[i][0] + Bahn[i][1]*Bahn[i][1] + Bahn[i][2]*Bahn[i][2] );
 		produkt1 = Bahn[i][0]*Bahn[i][3] + Bahn[i][1]*Bahn[i][4] + Bahn[i][2]*Bahn[i][5];
@@ -183,7 +183,7 @@ int main(){
 	Datei.close();
 
 	Datei.open( "Ergebnisse/Ergebnis_4_E_Lenzrunge_2.txt" , std::ios::trunc | std::ios::out);
-	for (int  k = 0; k < (int) 1000; ++k) //Schleife um die Bahn eines Teilchens in eine Matrix zu schreiben
+	for (int  k = 0; k < (int) 1000; ++k) //Schleife, um die Bahn eines Teilchens in eine Matrix zu schreiben
 	{
 		for (int j = 0; j < 6; ++j)
 		{
@@ -192,7 +192,7 @@ int main(){
 	}
 
 
-	for (int i = 0; i < 100; ++i) //Aufgabenteil C: Schleife mit der die Erhaltungsgröße des Lenz-Runge-Vektors gezeigt werden soll.
+	for (int i = 0; i < 100; ++i) //Aufgabenteil c): Schleife, mit der die Erhaltung des Lenz-Runge-Vektors gezeigt werden soll.
 	{
 		Norm = sqrt( Bahn[i][0]*Bahn[i][0] + Bahn[i][1]*Bahn[i][1] + Bahn[i][2]*Bahn[i][2] );
 		produkt1 = Bahn[i][0]*Bahn[i][3] + Bahn[i][1]*Bahn[i][4] + Bahn[i][2]*Bahn[i][5];

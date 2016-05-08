@@ -2,10 +2,10 @@
 #include "fstream"
 #include <cmath>
 
-void Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* Kraftfeld(double*) , std::fstream& Datei , double Breite = 0.001){ /// Funktion die die Bahn eines Teilchens in einem beliebiges Kraftfeld berechnet und in eine Datei speichert
+void Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* Kraftfeld(double*) , std::fstream& Datei , double Breite = 0.001){ /// Funktion, die die Bahn eines Teilchens in einem beliebiges Kraftfeld berechnet und in eine Datei speichert
 	double *Y_n = new double[7];
-	double Anzahl =  (Zeit / Breite); // Anzahl als Double definiert damit der Bruch ein Ergebnis liefert
-	for (int i = 0; i < 3; ++i)	// Schleife damit die Ausgangswerte in den Vektor gespeichert wird
+	double Anzahl =  (Zeit / Breite); // Anzahl als Double definiert, damit der Bruch ein Ergebnis liefert
+	for (int i = 0; i < 3; ++i)	// Schleife, damit die Ausgangswerte in den Vektor gespeichert werden
 	{
 		Y_n[i] = Ort[i];
 	}
@@ -23,7 +23,7 @@ void Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* 
 		Datei << Y_n[i] << '\t';
 	}
 	Datei << std::endl;
-	for (double Zaehler = 1; Zaehler <= Anzahl; ++Zaehler) // Schleife um die Iteration zu verwirklichen
+	for (double Zaehler = 1; Zaehler <= Anzahl; ++Zaehler) // Schleife, um die Iteration zu verwirklichen
 	{
 		for (int Komponente = 0; Komponente < 3; ++Komponente)
 		{
@@ -91,10 +91,10 @@ void Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* 
 	}
 }
 
-double* Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* Kraftfeld(double*) , double Breite = 0.001){ // Eine Funktion die den Ort und die Geschwindigkeit eines Teilchens Zurück gibt, dass sich nach einer Bestimmten Zeit in einem Kraftfeld befindet
+double* Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , double* Kraftfeld(double*) , double Breite = 0.001){ // Eine Funktion, die den Ort und die Geschwindigkeit eines Teilchens zurückgibt, das sich nach einer bestimmten Zeit in einem Kraftfeld befindet
 	double *Y_n = new double[7];
-	double Anzahl = Zeit / Breite; // die Anzahl als Double definiert damit der Bruch ein Ergebnis liefert
-	for (int i = 0; i < 3; ++i)// Schleife damit die Ausgangswerte in den Vektor gespeichert wird
+	double Anzahl = Zeit / Breite; // Anzahl als Double definiert, damit der Bruch ein Ergebnis liefert
+	for (int i = 0; i < 3; ++i)// Schleife, damit die Ausgangswerte in den Vektor gespeichert werden
 	{
 		Y_n[i] = Ort[i];
 	}
@@ -107,7 +107,7 @@ double* Runge_Kutta( double Zeit , double *Ort , double *Geschwindigkeit , doubl
 	double *K_3=new double[6];
 	double *K_4=new double[6];
 	
-	for (double Zaehler = 1; Zaehler <= Anzahl; ++Zaehler)// Schleife um die Iteration zu verwirklichen
+	for (double Zaehler = 1; Zaehler <= Anzahl; ++Zaehler)// Schleife, um die Iteration zu verwirklichen
 	{
 		for (int Komponente = 0; Komponente < 3; ++Komponente)
 		{
