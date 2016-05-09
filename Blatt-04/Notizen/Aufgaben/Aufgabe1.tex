@@ -24,3 +24,22 @@ Die kinetische Energie $T=\frac{1}{2}m{\dot{\vec{r}}}^2$ ist
 \begin{align}
 T=\frac{1}{2}\left(2\dot\theta_1^2+\dot\theta_2^2+2\cos(\theta_1-\theta_2)\dot\theta_1\dot\theta_2\right)\cdot\SI{1}{\square\meter\kilogram}~.
 \end{align}
+
+\subsection*{b)}
+Für kleine Winkel werden die Näherungen $\sin(\theta_i)\approx\theta_i$ und $\cos(\theta_i)\approx 1$ verwendet.
+Unter Vernachlässigung der $\dot\theta_i^2$-Terme ergeben sich die folgenden DGLen:
+\begin{align}
+\ddot\theta_1&=g_1(\theta_2-2\theta_1)\\
+\ddot\theta_2&=2g_2(\theta_1-\theta_2)
+\end{align}
+Aus diesem DGL-System werden mit dem Ansatz $\theta_i=a_i\cos(\omega t)$ die Eigenschwingungen berechnet.
+Es ergeben sich die Gleichungen
+\begin{align}
+\omega^2&=g_1\frac{2a_1-a_2}{a_1}\label{eq:omega1}~,\\
+\omega^2&=2g_2\frac{a_2-a_1}{a_2}\label{eq:omega2}~.
+\end{align}
+Die Eigenschwingungen ergeben sich unter der Voraussetzung der Gleichheit von Gleichung \eqref{eq:omega1} und Gleichung \eqref{eq:omega2}.
+Daraus folgt für die Schwingung die Bedingung
+\begin{align}
+a_1=\pm\frac{a_2}{\sqrt{2}}~.
+\end{align}
