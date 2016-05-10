@@ -4,23 +4,23 @@
 \subsection*{a)}
 Die Orte der Massen $m_1$ und $m_2$ im Doppelpendel sind:
 \begin{align}
-\vec{r_1}=\begin{pmatrix}\sin(\theta_1)\\\cos(\theta_1)\end{pmatrix}
+\vec{r_1}=\begin{pmatrix}\sin(\theta_1)\\-\cos(\theta_1)\end{pmatrix}
 \cdot\SI{1}{m}~~\text{und}~~
-\vec{r_2}=\begin{pmatrix}\sin(\theta_1)+\sin(\theta_2)\\\cos(\theta_1)+\cos(\theta_2)\end{pmatrix}\cdot\SI{1}{m}.
+\vec{r_2}=\begin{pmatrix}\sin(\theta_1)+\sin(\theta_2)\\-\cos(\theta_1)-\cos(\theta_2)\end{pmatrix}\cdot\SI{1}{m}.
 \end{align}
 Die Geschwindigkeiten sind also:
 \begin{align}
-\dot{\vec{r_1}}=\begin{pmatrix}\dot{\theta_1}\cos(\theta_1)\\-\dot\theta_1\sin(\theta_1)\end{pmatrix}\cdot\SI{1}{\meter\per\second}
+\dot{\vec{r_1}}=\begin{pmatrix}\dot{\theta_1}\cos(\theta_1)\\\dot\theta_1\sin(\theta_1)\end{pmatrix}\cdot\SI{1}{\meter\per\second}
 ~~\text{und}~~
-\vec{r_2}=\begin{pmatrix}\dot\theta_1\cos(\theta_1)+\dot{\theta_2}\cos(\theta_2)\\\-\dot{\theta_1}sin(\theta_1)-\dot{\theta_2}\sin(\theta_2)\end{pmatrix}\cdot\SI{1}{\meter\per\second}.
+\vec{r_2}=\begin{pmatrix}\dot\theta_1\cos(\theta_1)+\dot{\theta_2}\cos(\theta_2)\\\-\dot{\theta_1}\sin(\theta_1)+\dot{\theta_2}\sin(\theta_2)\end{pmatrix}\cdot\SI{1}{\meter\per\second}.
 \end{align}
-Die potentielle Energie $V=m\cdot g\cdot h$ ist
+Die potentielle Energie $V=\sum\limits_{i}m_i\cdot g\cdot h_i$ ist
 \begin{align}
 V=&-(m_1+m_2)gL_1\cos(\theta_1)-m_2gL_2\cos(\theta_2)\\
 =&-g(2\cos(\theta_1)+\cos(\theta_2))\cdot\SI{1}{\meter\kilogram}~,
 \end{align}
 wobei $m_1=m_2$ und $L_1=L_2=\SI{1}{m}$ gilt.\\
-Die kinetische Energie $T=\frac{1}{2}m{\dot{\vec{r}}}^2$ ist
+Die kinetische Energie $T=\frac{1}{2}\sum\limits_{i}m_i{\dot{\vec{r_i}}}^2$ ist
 \begin{align}
 T=\frac{1}{2}\left(2\dot\theta_1^2+\dot\theta_2^2+2\cos(\theta_1-\theta_2)\dot\theta_1\dot\theta_2\right)\cdot\SI{1}{\square\meter\kilogram}~.
 \end{align}
