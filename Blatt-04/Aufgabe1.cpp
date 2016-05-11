@@ -100,9 +100,10 @@ int main(){
 	double theta_geschwindigkeit_1 = 0.0;
 	double theta_geschwindigkeit_2 = 0.0;
 	double Breite = 0.01;
+	double Zeit = 10.0;
 
 	Datei.open("Ergebnisse/Ergebnis_1_C_1.txt" , std::ios::trunc | std::ios::out);
-	Doppelpendel( 30.0 , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
+	Doppelpendel( Zeit , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
 	Datei.close();
 
 	theta_1 = 0.1;
@@ -111,7 +112,7 @@ int main(){
 	theta_geschwindigkeit_2 = 0.0;
 
 	Datei.open("Ergebnisse/Ergebnis_1_C_2.txt" , std::ios::trunc | std::ios::out);
-	Doppelpendel( 30 , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
+	Doppelpendel( Zeit , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
 	Datei.close();
 
 	theta_1 = 0.0;
@@ -120,7 +121,7 @@ int main(){
 	theta_geschwindigkeit_2 = 4.472;
 
 	Datei.open("Ergebnisse/Ergebnis_2_A_1.txt" , std::ios::trunc | std::ios::out);
-	Doppelpendel( 30 , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
+	Doppelpendel( Zeit , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
 	Datei.close();
 
 	theta_1 = 0.0;
@@ -129,7 +130,7 @@ int main(){
 	theta_geschwindigkeit_2 = 11.832;
 
 	Datei.open("Ergebnisse/Ergebnis_2_A_2.txt" , std::ios::trunc | std::ios::out);
-	Doppelpendel( 30 , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
+	Doppelpendel( Zeit , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
 	Datei.close();
 
 
