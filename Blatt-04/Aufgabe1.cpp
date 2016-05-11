@@ -133,6 +133,23 @@ int main(){
 	Doppelpendel( Zeit , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
 	Datei.close();
 
+	theta_1 = 0.0;
+	theta_2 = 0.0;
+	theta_geschwindigkeit_1 = 0.0;
+	theta_geschwindigkeit_2 = 4.482;
+
+	Datei.open("Ergebnisse/Ergebnis_2_B_1.txt" , std::ios::trunc | std::ios::out);
+	Doppelpendel( Zeit , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
+	Datei.close();
+
+	theta_1 = 0.0;
+	theta_2 = 0.0;
+	theta_geschwindigkeit_1 = 0.0;
+	theta_geschwindigkeit_2 = 11.842;
+
+	Datei.open("Ergebnisse/Ergebnis_2_B_2.txt" , std::ios::trunc | std::ios::out);
+	Doppelpendel( Zeit , Breite , theta_1 , theta_2 , theta_geschwindigkeit_1 , theta_geschwindigkeit_2 , Datei);
+	Datei.close();
 
 	return 0;
 }
