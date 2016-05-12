@@ -4,20 +4,21 @@
 \subsection*{a)}
 Die Orte der Massen $m_1$ und $m_2$ im Doppelpendel sind:
 \begin{align}
-\vec{r_1}=\begin{pmatrix}\sin(\theta_1)\\-\cos(\theta_1)\end{pmatrix}
+\vec{r_1}=\begin{pmatrix}\sin(\theta_1)\\-\cos(\theta_1)+\SI{1,5}{m}\end{pmatrix}
 \cdot\SI{1}{m}~~\text{und}~~
-\vec{r_2}=\begin{pmatrix}\sin(\theta_1)+\sin(\theta_2)\\-\cos(\theta_1)-\cos(\theta_2)\end{pmatrix}\cdot\SI{1}{m}.
+\vec{r_2}=\begin{pmatrix}\sin(\theta_1)+\sin(\theta_2)\\-\cos(\theta_1)-\cos(\theta_2)+\SI{1,5}{m}\end{pmatrix}\cdot\SI{1}{m}~.
 \end{align}
 Die Geschwindigkeiten sind also:
 \begin{align}
 \dot{\vec{r_1}}=\begin{pmatrix}\dot{\theta_1}\cos(\theta_1)\\\dot\theta_1\sin(\theta_1)\end{pmatrix}\cdot\SI{1}{\meter\per\second}
 ~~\text{und}~~
-\vec{r_2}=\begin{pmatrix}\dot\theta_1\cos(\theta_1)+\dot{\theta_2}\cos(\theta_2)\\\-\dot{\theta_1}\sin(\theta_1)+\dot{\theta_2}\sin(\theta_2)\end{pmatrix}\cdot\SI{1}{\meter\per\second}.
+\dot{\vec{r_2}}=\begin{pmatrix}\dot\theta_1\cos(\theta_1)+\dot{\theta_2}\cos(\theta_2)\\\-\dot{\theta_1}\sin(\theta_1)+\dot{\theta_2}\sin(\theta_2)\end{pmatrix}\cdot\SI{1}{\meter\per\second}~.
 \end{align}
+Als Nullpunkt für die potentielle Energie wird der Schwerpunkt des Systems im Ruhezustand, das heißt ohne Auslenkung ($\theta_1=\theta_2=0$), gewählt.
 Die potentielle Energie $E_\text{pot}=\sum\limits_{i}m_i\cdot g\cdot h_i$ ist
 \begin{align}
-E_\text{pot}=&-(m_1+m_2)gL_1\cos(\theta_1)-m_2gL_2\cos(\theta_2)\\
-=&-g(2\cos(\theta_1)+\cos(\theta_2))\cdot\SI{1}{\meter\kilogram}~,
+E_\text{pot}=&(m_1+m_2)gL_1\left(-\cos(\theta_1)+\SI{1,5}{m}\right)+m_2gL_2\left(-\cos(\theta_2)+\SI{1,5}{m}\right)\\
+=&g(3-2\cos(\theta_1)-\cos(\theta_2))\cdot\SI{1}{\meter\kilogram}~,
 \end{align}
 wobei $m_1=m_2$ und $L_1=L_2=\SI{1}{m}$ gilt.\\
 Die kinetische Energie $E_\text{kin}=\frac{1}{2}\sum\limits_{i}m_i{\dot{\vec{r_i}}}^2$ unter denselben Voraussetzungen ist
@@ -54,17 +55,19 @@ Es ist zu erkennen, dass sich potentielle und kinetische immer so ausgleichen, d
 	\caption{Kinetische Energie $E_\text{kin}$, potentielle Energie $E_\text{pot}$ und Gesamtenergie $E_\text{ges}$ in Abhängigkeit von der Zeit $t$ mit den unterschiedlichen Anfangsbedingungen.\label{fig:Energie}}
 \end{figure}\\
 Im Fall von $\theta_2=+\sqrt{2}\theta_1$ geschehen die Schwingungen immer in gleicher Richtung, wohingegen sie im Fall von $\theta_2=-\sqrt{2}\theta_1$ gegenläufig sind.
-Beide Schwingungen sind periodisch.
+Beide Schwingungen sind periodisch.\\
+Die zeitlichen Verläufe des Winkels und der Winkelgeschwindigkeit sind in \cref{fig:winkel} und \cref{fig:winkelgeschwindigkeit} festgehalten.
 \begin{figure}[h!]
 	\includegraphics[width = \textwidth]{../Plots/Plot_1_C_winkel.pdf}
 	\caption{Zeitlicher Verlauf der Winkel.\label{fig:winkel}}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\includegraphics[width = \textwidth]{../Plots/Plot_1_C_winkelgeschwindigkeit.pdf}
 	\caption{Zeitlicher Verlauf der Winkelgeschwindigkeit.\label{fig:winkelgeschwindigkeit}}
 \end{figure}
 
+\newpage
 \subsection*{d)}
 Die Trajektorie der Masse $m_2$ ist in \cref{fig:Trajektorie} dargestellt.
 Aufgetragen sind $x$- und $y$-Koordinate des Vektors $\vec{r_2}$ aus Aufgabenteil a).
