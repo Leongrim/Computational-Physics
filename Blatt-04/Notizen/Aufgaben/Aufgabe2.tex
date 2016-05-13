@@ -1,5 +1,15 @@
 % !TeX root = ../Notizen.tex
 \section*{Aufgabe 2: Poincaré Schnitt}
+Bei niedrigen Fällen wie in Aufgabe 1 liegt eine Harmonische Schwingung vor.
+Wenn die Energie größer wird tritt chaotisches Verhalten auf.
+Bei noch größeren Energien kehrt das System in ein quasi periodischen Zustand zurück.
+Anfangsbedingung für die Beiden Fälle sind hier aufgelistet.
+\begin{align}
+	\theta_{1,\text{chaos}}=&0,0 \hspace{50pt} \dot{\theta}_{1,\text{chaos}}=0,0\nonumber\\
+	\theta_{2,\text{chaos}}=&0,0 \hspace{50pt} \dot{\theta}_{2,\text{chaos}}=4,472\hspace{50pt}E=E_\text{kin}=\SI{10}{\joule}\\
+	\theta_{1,\text{quasi}}=&0,0 \hspace{50pt} \dot{\theta}_{1,\text{quasi}}=0,0\nonumber\\
+	\theta_{2,\text{quasi}}=&0,0 \hspace{50pt} \dot{\theta}_{2,\text{quasi}}=11,832\hspace{50pt}E=E_\text{kin}=\SI{70}{\joule}
+\end{align}
 \subsection*{a)}
 Die Phasenraumbilder für die drei betrachteten Fälle sind in \cref{fig:phasenraum1,fig:phasenraum2,fig:phasenraum3} dargestellt.
 \begin{figure}[h!]
@@ -29,3 +39,8 @@ Der Abstand der chaotischen Dynamik von der ungestörten Schwingung ist in \cref
 	\includegraphics[width = \textwidth]{../Plots/Plot_2_B_2.pdf}
 	\caption{Abstand der Trajektorie mit chaotischer Dynamik von derjenigen der ungestörten Schwingung in Abhängigkeit von der Zeit $t$.\label{fig:abstand2}}
 \end{figure}
+
+\subsection*{c)}
+Es werden die Poincaré Schnitte berechnet.
+Dabei werden werte gewählt bei denen $\theta_2=0$ und es gilt $\dot{\theta_2}+\lambda\dot{\theta_1}\cos\theta_1>0$ gilt.
+Hier für werden verschiedene Anfangsbedingungen mit gleicher Energie berechnet.
