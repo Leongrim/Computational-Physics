@@ -125,13 +125,13 @@ int main(){
 	std::fstream Datei;
 	Datei.open( "Ergebnisse/Ergebnis_2_C_Chaos.txt" , std::ios::trunc | std::ios::out);
 	std::fstream Datei_quasi;
-	double Breite = 1e-3;
-	double Zeit = 1e4;
+	double Breite = 1e-2;
+	double Zeit = 5e3;
 	double theta_v_quasi = 11.382;
 	double theta_v_Chaos = 4.472;
 	//double theta_v_Chaos = theta_v_quasi;
 
-	/*//*/
+	/*E=E_kin muss = E' sein*/
 
 	double Phasenraum[4];
 	Phasenraum[0] = 0.0;
@@ -140,28 +140,60 @@ int main(){
 	Phasenraum[3] = theta_v_Chaos;//*/
 	Poincare(Breite , Zeit , Phasenraum , Datei);
 
+	// E' mit theta_V_2 = 0.0 und theta_1 = theta_2 = 0.0
 	Phasenraum[0] = 0.0;
 	Phasenraum[1] = 0.0;
 	Phasenraum[2] = theta_v_Chaos/sqrt(2);
 	Phasenraum[3] = 0.0;
 	Poincare(Breite , Zeit , Phasenraum , Datei);
 
+	// E' mit theta_V_1 = theta_V_2 und theta_1 = theta_2 = 0.0
 	Phasenraum[0] = 0.0;
 	Phasenraum[1] = 0.0;
-	Phasenraum[2] = 1.0/2.0*theta_v_Chaos/sqrt(2.0);
+	Phasenraum[2] = 1.0/2.0*theta_v_Chaos;
+	Phasenraum[3] = 1.0/2.0*theta_v_Chaos;
+	Poincare(Breite , Zeit , Phasenraum , Datei);
+
+	//E' mit mit theta_v_1 =0.5 theta_v_2 und theta_1=theta_2 =0.0
+	Phasenraum[0] = 0.0;
+	Phasenraum[1] = 0.0;
+	Phasenraum[2] = 0.5*theta_v_Chaos/sqrt(2.0);
 	Phasenraum[3] = theta_v_Chaos/sqrt(2.0);
 	Poincare(Breite , Zeit , Phasenraum , Datei);
 
-
+	//theta_v_1 = 0.25 theta_V_2 und theta_1 = theta_2 = 0.0
 	Phasenraum[0] = 0.0;
 	Phasenraum[1] = 0.0;
 	Phasenraum[2] = 1.0/4.0*theta_v_Chaos*sqrt(8.0/11.0);
 	Phasenraum[3] = theta_v_Chaos*sqrt(8.0/11.0);
 	Poincare(Breite , Zeit , Phasenraum , Datei);
 
+	//thete'_v_2 = 0.0 , theta'_v_1 = alpha theta_v_2 und theta'_1 = 0.0 
+	double alpha = 0.25;
 	Phasenraum[0] = 0.0;
-	Phasenraum[1] = acos(3.0/2.0*theta_v_Chaos*theta_v_Chaos/9.81 - 1.0);
-	Phasenraum[2] = sqrt(theta_v_Chaos);
+	Phasenraum[1] = acos( ( alpha*alpha - 0.5 ) * theta_v_Chaos*theta_v_Chaos / 9.81 + 1.0 );
+	Phasenraum[2] = alpha * theta_v_Chaos;
+	Phasenraum[3] = 0.0;
+	Poincare(Breite , Zeit , Phasenraum , Datei);
+
+	alpha = 0.1;
+	Phasenraum[0] = 0.0;
+	Phasenraum[1] = acos( ( alpha*alpha - 0.5 ) * theta_v_Chaos*theta_v_Chaos / 9.81 + 1.0 );
+	Phasenraum[2] = alpha * theta_v_Chaos;
+	Phasenraum[3] = 0.0;
+	Poincare(Breite , Zeit , Phasenraum , Datei);
+
+	alpha = 0.2;
+	Phasenraum[0] = 0.0;
+	Phasenraum[1] = acos( ( alpha*alpha - 0.5 ) * theta_v_Chaos*theta_v_Chaos / 9.81 + 1.0 );
+	Phasenraum[2] = alpha * theta_v_Chaos;
+	Phasenraum[3] = 0.0;
+	Poincare(Breite , Zeit , Phasenraum , Datei);
+
+	alpha = 0.0;
+	Phasenraum[0] = 0.0;
+	Phasenraum[1] = acos( ( alpha*alpha - 0.5 ) * theta_v_Chaos*theta_v_Chaos / 9.81 + 1.0 );
+	Phasenraum[2] = alpha * theta_v_Chaos;
 	Phasenraum[3] = 0.0;
 	Poincare(Breite , Zeit , Phasenraum , Datei);
 
