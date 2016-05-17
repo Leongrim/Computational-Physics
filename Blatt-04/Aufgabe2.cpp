@@ -197,6 +197,7 @@ int main(){
 	Phasenraum[3] = 0.0;
 	Poincare(Breite , Zeit , Phasenraum , Datei);
 
+
 	Datei.close();
 	Datei.open( "Ergebnisse/Ergebnis_2_C_Harmonisch.txt" , std::ios::trunc | std::ios::out);
 	Phasenraum[0] = 0.1;
