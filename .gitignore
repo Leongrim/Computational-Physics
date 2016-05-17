@@ -2,6 +2,7 @@
 *.o
 *.txt
 # Latex zusatzdateien
+*.pdf
 *.aux
 *.log
 *.gz
