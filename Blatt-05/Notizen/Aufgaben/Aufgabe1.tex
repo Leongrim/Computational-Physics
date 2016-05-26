@@ -141,26 +141,26 @@ Mit der Hilfe des Drucks kann $g(r_l)$ bestimmt werden.
 \end{align}
 Dabei ist $\Delta V$ das Volumen Element
 \begin{align*}
-	\Delta V \propto (l\Delta r)^3-((l-1)\Delta r)^3.
+	\Delta V \propto (l\Delta r)^2-((l-1)\Delta r)^2.
 \end{align*}
 Dadurch haben wir, eine Formel, die proportional zu $g(r)$ ist.
 Es werden für drei Verschiedene Anfangstemperaturen $T_1(0)=1\epsilon,T_2(0)=0,01\epsilon$ und $T(0)=100\epsilon$ mit einer $L=8\sigma$, die Paarverteilungen bestimmt.
 Dabei wird die Erst gemessen wenn das System äquilibert ist.
 \begin{figure}[h!]
 	\centering
-	\subfigure[$\langle T\rangle$]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_1_Temperatur_OBS.pdf}}
+	\subfigure[$\langle T_1(t)\rangle$]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_1_Temperatur_OBS.pdf}}
 	\subfigure[$g(r)$]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_1_Paar.pdf}}
-	\caption{Aus der Zeit gemittelten Temperatur, erkennt man dass das System ab $t=50s$ äquilibriert ist und aus dem Plot für die Paarverteilung lässt sich erkennen das ein Übergang zwischen gasförmig und Flüssig vorliegt.}
+	\caption{Aus der Zeit gemittelten Temperatur, erkennt man dass das System ab $t=50s$ äquilibriert ist und aus dem Plot für die Paarverteilung lässt sich erkennen das ein Übergang zwischen fest vorliegt.}
 \end{figure}
 \begin{figure}[h!]
 	\centering
-	\subfigure[$\langle T_1\rangle$]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_2_Temperatur_OBS.pdf}}
+	\subfigure[$\langle T_2(t)\rangle$]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_2_Temperatur_OBS.pdf}}
 	\subfigure[$g(r)$]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_2_Paar.pdf}}
 	\caption{Aus dem Plot der Temperatur $\langle T\rangle$ lässt sich erkennen, dass das System nach $60s$ äquilibriert ist. Aus dem Plot für die Paarkollerationsfunktion ist zu erkennen das es sich um eine flüssige Phase handelt.}
 \end{figure}
 \begin{figure}[h!]
 	\centering
-	\subfigure[$\langle T\rangle$]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_3_Temperatur_OBS.pdf}}
+	\subfigure[$\langle T_3(t)\rangle$]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_3_Temperatur_OBS.pdf}}
 	\subfigure[$g(r)$]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_3_Paar.pdf}}
 	\caption{Aus dem Plot der Temperatur lässt sich erkennen, dass das System nach 20 Sekunden äquilibriert ist. Die Phase liegt im gasförmigen Bereich.}
 \end{figure}\newpage
@@ -171,5 +171,7 @@ Das geschieht wie bei der Initialisierung.
 	\centering
 	\subfigure[]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_D_Energie.pdf}}
 	\subfigure[]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_D_Paar.pdf}}
-	
+	\centering
+	\subfigure[]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_D.png}}
+	\subfigure[]{\includegraphics[width = 0.49\textwidth]{../Plots/Plot_D_1.png}}
 \end{figure}
