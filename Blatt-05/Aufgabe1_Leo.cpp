@@ -4,6 +4,7 @@
 #include <time.h>
 #include "fstream"
 #include <string>
+#define _USE_MATH_DEFINES 
 
 double Generator(double min , double max){
 	double Random = (double) rand()/ RAND_MAX;
@@ -132,8 +133,8 @@ void Paarverteilung( int Bins , double* Ort_X , double* Ort_Y , double* Paar , u
 	double Abstand_x;
 	double Abstand_y;
 	double Abstand;
-	double Konst = Laenge*Laenge/(16*16);
-	double Breite = cutoff/Bins;
+	double Konst = Laenge*Laenge/(16.0*16.0*3.0);
+	double Breite = cutoff/(Bins);
 	for (int n_x = -1; n_x < 2; ++n_x)
 	{
 		for (int n_y = -1; n_y < 2; ++n_y)
@@ -148,7 +149,7 @@ void Paarverteilung( int Bins , double* Ort_X , double* Ort_Y , double* Paar , u
 					for (int i = 1; i <= Bins ; ++i)
 					{
 						if( Breite * (i - 1) < Abstand && Breite * ( i ) > Abstand){
-							Paar[ i ] += Konst/((double) i * Breite * i * Breite * i * Breite - ( i - 1) * Breite *( i - 1 ) * Breite * ( i - 1 ) * Breite );
+							Paar[ i ] += Konst/((double) i * Breite * i * Breite - ( i - 1 ) * Breite * ( i - 1 ) * Breite );
 
 							break;
 						}
@@ -282,7 +283,7 @@ void Verlet( double Breite , double Temp , double Laenge , double Zeit , uint Bi
 }
 
 int main(){
-	srand (12);//1233456     12356
+	srand (42);//1233456     12356
 
 
 	std::string Datei("Ergebnisse/Ergebnis_");
@@ -305,24 +306,24 @@ int main(){
 
 	Tempe = 100.0;
 	Laenge = 8.0;
-	Zeit = 2e2;
+	Zeit = 1e1;
 	Breite = 1e-3;
-	Messung = 20.0;
-	//Verlet( Breite , Tempe , Laenge , Zeit , Bins , Messung , Datei+"3" , false );
+	Messung = 2.0;
+	Verlet( Breite , Tempe , Laenge , Zeit , Bins , Messung , Datei+"3" , false );
 
 	Tempe = 1.0;
 	Laenge = 4.0;
 	Zeit = 5.0;
-	Breite = 1e-3;
+	Breite = 1e-2;
 	Messung = 2.0;
 	//Verlet( Breite , Tempe , Laenge , Zeit , Bins , Messung , Datei+"0" , false );
 
 	Tempe = 0.01;
 	Laenge = 8.0;
-	Zeit = 1.5e2;
+	Zeit = 1e2;
 	Breite = 1e-2;
-	Messung = 50.0;
-	Verlet( Breite , Tempe , Laenge , Zeit , Bins , Messung , Datei+"D" , true );
+	Messung = 10.0;
+	//Verlet( Breite , Tempe , Laenge , Zeit , Bins , Messung , Datei+"D" , true );
 
 
 	return 0;
