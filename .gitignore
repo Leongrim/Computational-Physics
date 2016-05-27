@@ -6,5 +6,6 @@
 *.aux
 *.log
 *.gz
+*.png
 program*
 /Blatt-**/Notizen/Notizen.pdf
