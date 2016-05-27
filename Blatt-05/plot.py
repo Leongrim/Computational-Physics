@@ -221,9 +221,9 @@ plt.clf()
 ###############################################################################################################
 
 Zeit , Energie_kin , Energie_pot , Energie_ges , Temperatur , V_S_X , V_S_Y = np.genfromtxt( 'Ergebnisse/Ergebnis_D_Energie.txt' , unpack=True)
-plt.plot( Zeit[:-4000:], Energie_ges[:-4000:] , 'k-' , label=r'$E_{ges}$')
-plt.plot( Zeit[:-4000:], Energie_pot[:-4000:] , 'b-' , label=r'$E_{pot}$')
-plt.plot( Zeit[:-4000:], Energie_kin[:-4000:] , 'r-' , label=r'$E_{kin}$')
+plt.plot( Zeit[:-1000:], Energie_ges[:-1000:] , 'k-' , label=r'$E_{ges}$')
+plt.plot( Zeit[:-1000:], Energie_pot[:-1000:] , 'b-' , label=r'$E_{pot}$')
+plt.plot( Zeit[:-1000:], Energie_kin[:-1000:] , 'r-' , label=r'$E_{kin}$')
 plt.xlabel(r'$t/s$')
 plt.ylabel(r'$E/\epsilon$')
 plt.legend(loc='best')
@@ -269,10 +269,15 @@ X_1 , Y_1 , X_2 , Y_2 , X_3 , Y_3 , X_4 , Y_4 , X_5 , Y_5 , X_6 , Y_6 , X_7 , Y_
 
 plt.xlabel(r'$x/\sigma$')
 plt.ylabel(r'$y/\sigma$')
+plt.ylim(0 , 8)
+plt.xlim(0 , 8)
 
 plt.plot( X_1 , Y_1 , 'x')
+
 plt.plot( X_2 , Y_2 , 'x')
+
 plt.plot( X_3 , Y_3 , 'x')
+
 plt.plot( X_4 , Y_4 , 'x')
 plt.plot( X_5 , Y_5 , 'x')
 plt.plot( X_6 , Y_6 , 'x')
