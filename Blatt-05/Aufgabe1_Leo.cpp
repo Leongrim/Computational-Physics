@@ -283,7 +283,7 @@ void Verlet( double Breite , double Temp , double Laenge , double Zeit , uint Bi
 }
 
 int main(){
-	srand (42);//1233456     12356
+	srand (12356);//1233456     12356
 
 
 	std::string Datei("Ergebnisse/Ergebnis_");
@@ -309,7 +309,7 @@ int main(){
 	Zeit = 1e1;
 	Breite = 1e-3;
 	Messung = 2.0;
-	Verlet( Breite , Tempe , Laenge , Zeit , Bins , Messung , Datei+"3" , false );
+	//Verlet( Breite , Tempe , Laenge , Zeit , Bins , Messung , Datei+"3" , false );
 
 	Tempe = 1.0;
 	Laenge = 4.0;
@@ -320,10 +320,10 @@ int main(){
 
 	Tempe = 0.01;
 	Laenge = 8.0;
-	Zeit = 1e2;
+	Zeit = 2e3;
 	Breite = 1e-2;
-	Messung = 10.0;
-	//Verlet( Breite , Tempe , Laenge , Zeit , Bins , Messung , Datei+"D" , true );
+	Messung = 80.0;
+	Verlet( Breite , Tempe , Laenge , Zeit , Bins , Messung , Datei+"D" , true );
 
 
 	return 0;
