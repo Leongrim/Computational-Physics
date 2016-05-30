@@ -26,6 +26,36 @@ double* Kraft(double ort1x, double ort1y, double ort2x, double ort2y){
     abstand[1] *= 48.0 * r6 * (r6 - 1.0/2.0) / (betrag*betrag);
     return abstand;
 }
+//Gesamtkraft
+double* Gesamtkraft(double ort1x, double ort1y, double* ort2x, double* ort2y, double L, int N){
+    //double* abstand = new double[2];
+    double* Gesamtkraft = new double[2];
+    for(int i = 0; i < N; ++i){
+        if (ort1x != ort2x[i] || ort1y != ort2y[i]){
+            for (int n_x = -1; n_x <= 1; ++n_x){
+                for (int n_y = -1; n_y <= 1; ++n_y){
+                    //abstand[0] = ort1x - ort2x[i];
+                    //abstand[1] = ort1y - ort2y[i];
+                    //double betrag = sqrt((abstand[0] + n_x*L)*(abstand[0] + n_x*L) + (abstand[1] + n_y*L)*(abstand[1] + n_y*L));
+                    Gesamtkraft[0] += Kraft(ort1x + n_x*L, ort1y + n_y*L, ort2x[i], ort2y[i])[0];// * (abstand[0] + n_x*L) / betrag;
+                    Gesamtkraft[1] += Kraft(ort1x + n_x*L, ort1y + n_y*L, ort2x[i], ort2y[i])[1];// * (abstand[1] + n_y*L) / betrag;
+                }
+            }
+        }
+    }
+    //delete[] abstand;
+    return Gesamtkraft;
+}
+//Verlet-Algorithmus
+double* Verlet(double* ort1x, double* ort1y, double* velx, double* vely, double h, double L, int N){
+    double* ort2x = new double[N];
+    double* vel2x = new double[N];
+    for(int i = 0; i < N; ++i){
+        ort2x[i] = ort1x[i] + velx[i]*h + 1.0/2.0 * Gesamtkraft(ort1x[i], ort1y[i], ort1x, ort1y, L, N)[0] * h*h;
+        //vel2x[i] = velx[i] + (Gesamtkraft(ort1x[i], ort1y[i], ort1x, ort1y, L, N)[0] + Gesamtkraft(ort2x[i], ort2y[i], ort2x, ort2y, L, N)[0] * h/2.0;
+    }
+    return ort2x;
+}
 //Schwerpunktsgeschwindigkeit
 double* Schwerpunkt(double* velx, double* vely, int N){
     double* sum_vel = new double[2];
@@ -125,6 +155,7 @@ void initialize(double* ortx, double* orty, double* velx, double* vely, int N, d
 int main(int argc, char* argv[]){
 	int N = 16;//Teilchenzahl
     double L = 1.0;//Seitenlänge des Systems
+    double h = 0.01;//Schrittweite
 	double Temp = 1.0;//Anfangstemperatur
     double rx[N];//x-Koordinate des Ortes
     double ry[N];//y-Koordinate des Ortes
@@ -149,14 +180,30 @@ int main(int argc, char* argv[]){
     //Test der Kraftfunktion
     double Kraftx = 0.0;
     double Krafty = 0.0;
-    int Teilchen = 6;
+    int Teilchen = 13;
     for(int i = 0; i < N; ++i){
         if(i != Teilchen) Kraftx += Kraft(rx[Teilchen], ry[Teilchen], rx[i], ry[i])[0];
         if(i != Teilchen) Krafty += Kraft(rx[Teilchen], ry[Teilchen], rx[i], ry[i])[1];
     }
     std::cout << "Kraft x: " << Kraftx << std::endl;
     std::cout << "Kraft y: " << Krafty << std::endl;
-    
+    //Test der Gesamtkraftfunktion
+    /*double Gesamtkraftx = 0.0;
+    double Gesamtkrafty = 0.0;
+    int Teilchen = 0;
+    for(int i = 0; i < N; ++i){
+        if(i != Teilchen) Gesamtkraftx += Gesamtkraft(rx[Teilchen], ry[Teilchen], rx[i], ry[i])[0];
+        if(i != Teilchen) Gesamtkrafty += Kraft(rx[Teilchen], ry[Teilchen], rx[i], ry[i])[1];
+    }*/
+    std::cout << "Gesamtkraft x: " << Gesamtkraft(rx[Teilchen], ry[Teilchen], rx, ry, L, N)[0] << std::endl;
+    std::cout << "Gesamtkraft y: " << Gesamtkraft(rx[Teilchen], ry[Teilchen], rx, ry, L, N)[1] << std::endl;
+    //Test des Verlet-Algorithmus
+    //std::cout << "Verlet x: " << Verlet(rx, ry, vx, vy, h, L, N)[6] << std::endl;
+    std::cout << "Verlet x" << std::endl;
+    for(int i = 0; i < 16; ++i){
+        std::cout << Verlet(rx, ry, vx, vy, h, L, N)[i] << std::endl;
+    }
+
     return 0;
 }
 
