@@ -1,4 +1,149 @@
 % !TeX root = ../Notizen.tex
 
-\section*{Aufgabe 2: )}
+\section*{Aufgabe 2: Poisson-Gleichung}
+In dieser Aufgabe wird die Poisson-Gleichung
+\begin{align}
+	\left( \partial_x^2+\partial_y^2 \right)\phi(x,y)=-\rho(x,y)
+\end{align}
+mithilfe der Jacobi-Iteration gelöst.
+Dabei wird eine quadratische Fläche $F=[0,1]^2$A benutzt und Dirichlet-Randbedingungen verwendet.
+Dazu wird das System diskretisiert, indem es in Flächenstücke $\Delta F$ mit der Kantenlänge $\Delta = 0,05$ eingeteilt wird.
+So lässt sich das Feld 
+\begin{align}
+\phi(x ,y)=\phi(\Delta\cdot i , \Delta \cdot j)=\phi_{i,j}
+\end{align}
+diskretisieren.
+Die Poisson-Gleichung wird gelöst mit der Definition der numerischen 2ten Ableitung
+\begin{align}
+	(\partial_x^2+\partial_y^2)\phi_{i,j}=&\frac{\phi_{i-1,j}+2\phi_{i,j}+\phi_{i+1,j}}{\Delta^2}+\frac{\phi_{i,j-1}+2\phi_{i,j}+\phi_{i,j+1}}{\Delta^2}=-\rho_{i,j}\\
+	\Leftrightarrow\phi_{ij}=&\frac{1}{4}\left(\phi_{i-1,j}+\phi_{i+1,j}+\phi_{i,j-1}+\phi_{i,j+1}\right)+\frac{1}{4}\Delta^2 \rho_{i,j}
+\end{align}
+Die Iteration wird durchgeführt, bis eine Genauigkeit von $10^{-5}$ erreicht wurde.
+Weiter wird das elektrische Feld berechnet mithilfe von
+\begin{align}
+	\vec{E} &= -\vec{\nabla} \phi\\
+	E_x&=\frac{\phi_{i-1,j}-\phi_{i+1,j}}{2\Delta}\\
+	E_y&=\frac{\phi_{i,j-1}-\phi_{i,j+1}}{2\Delta}.
+\end{align}
+\newpage
 \subsection*{a)}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.75\textwidth]{../Plots/Plots_A.pdf}
+	\includegraphics[width = 0.75\textwidth]{../Plots/Plots_A_E_Feld.pdf}
+	\caption{Hier ist das Ergebnis für $\phi(x,y)=0$ dargestellt, so wohl das Potential als auch der Betrag des elektrischen Feldes}\label{fig:Ergebis_a}
+\end{figure}
+Um die Implementierung zu überprüfen, wird ein Feld mit $\phi(x,y)= 0$ generiert.
+Diese sind in  sind in \cref{fig:Ergebis_a} dargestellt.
+\newpage
+\subsection*{b)}
+Als nächstes wird das Feld berechnet, wo an einem Rand $\phi(x,1)=1$ gilt uns sonst an den Rändern 0 ist.
+Dazu wird auch eine analytische Lösung hergeleitet, um das Ergebnis zu überprüfen.
+Die Randbedingungen sind:
+\begin{align}
+	\phi(0,\ y)=0\hspace{1cm}\phi(x,\ 0)=0\\
+	\phi(1,\ y)=0\hspace{1cm}\phi(x,\ 1)=1
+\end{align}
+Dabei wird zur Lösung der Separationsansatz verwendet 
+\begin{align}
+	\phi(x,\ y)=w(x)\cdot v(y)=w\cdot v.
+\end{align}
+In die Poisson-Gleichung eingesetzt folgt
+\begin{align}
+	w'' \cdot v + w\cdot v'' &= -\rho(x,y)=0\\
+	\Leftrightarrow-\frac{w''}{w}&=\frac{v''}{v}=\lambda^2
+\end{align}
+Als Lösung für die Funktionen wird
+\begin{align}
+	w&=\sin(\lambda x)\label{eq:w}\\
+	v&=Ae^{-\lambda y}+Be^{\lambda y}
+\end{align}
+verwendet.
+Aus den Randbedingungen folgt
+\begin{align}
+	\phi(0,\ y)&=0\Rightarrow w(0)=0\\
+	\phi(1,\ y)&=0\Rightarrow w(1)=0\\
+	\lambda = \pi k\\
+	\phi(x,\ 0)&=0\Rightarrow v(0)=0\\
+	A+B&=0\Leftrightarrow A=-B
+\end{align}
+Daraus folgt 
+\begin{align}
+	\phi(x,\ y)&=\sum\limits_{k=0}^{\infty}\phi_k(x,\ y)=\sum\limits_{k=1}^{\infty}B_k\underbrace{\left( e^{-\pi ky }-e^{\pi k y} \right)}_{=-2\sinh(\pi k y)}\sin(\pi k x)
+\end{align}
+Mit der weiteren Randbedingung
+\begin{align}
+	\phi(x,\ 1)=\sum\limits_{k=1}^{\infty}-2\underbrace{ B_k\sinh(\pi k) }_{ \beta_k}\sin(\pi k x)
+\end{align}
+lässt sich der Koeffizient $B_k$ mithilfe der Fourier-Reihen-Entwicklung bestimmen.
+\newpage
+\begin{align}
+	\beta_k=&\int\limits_{0}^{1}\sin(\pi k x)dx=\frac{1}{\pi k} [cos(\pi k) - 1]=
+	\begin{cases}
+		=\frac{-2}{\pi k}\text{ wenn }k\text{ gerade}\\
+		=0 \text{ sonst}
+	\end{cases}\\
+	\Rightarrow
+	\beta_n=&\frac{-2}{\pi (2n+1)}=B_n\sinh(\pi (2n+1)),\hspace{1cm}n\in\mathbb{N}\\
+	\Leftrightarrow B_n=&\frac{-2}{\pi(2n+1)\sinh(\pi(2n+1))}
+\end{align}
+Daraus folgt dann für die Reihen Entwicklung für das Potential
+\begin{align}
+	\phi(x,\ y)=\sum\limits_{n=0}^{\infty}\frac{4\sinh(\pi (2n+1)y)}{\pi(2n+1)\sinh(\pi(2n+1))}\sin(\pi(2n+1)x).
+\end{align} 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.7\textwidth]{../Plots/Plots_B.pdf}
+	\caption{Hier ist das numerisch berechnete Potential dargestellt.}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.7\textwidth]{../Plots/Plots_B_theo.pdf}
+	\caption{Hier ist das analytisch berechnete Potential dargestellt.}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.7\textwidth]{../Plots/Plots_B_NUmerik_theo.pdf}
+	\caption{Hier ist das numerisch sowie das analytische Potential dargestellt.}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.7\textwidth]{../Plots/Plots_B_E_Feld.pdf}
+	\caption{Hier ist das Elektrische Feld dargestellt.}
+\end{figure}
+\newpage
+\vspace*{5cm}
+\newpage
+\subsection*{c)}
+Nun wird Eine Ladung in die Mitte der Fläche gesetzt so das die Ladungsdichte gilt 
+\begin{align}
+	\rho_{i,j}=q\delta(i-10)\delta(j-10),
+\end{align}
+mit $q=1$.
+Weiter soll das Potential am Rand verschwinden.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.75\textwidth]{../Plots/Plots_C.pdf}
+	\caption{Hier ist das Potential für eine Einzelne Ladung in der Mitte dargestellt.}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.75\textwidth]{../Plots/Plots_C_E_Feld.pdf}
+	\caption{Hier ist der Betraf des E-Feldes für eine Einzelne Ladung in der Mitte dargestellt.}
+\end{figure}
+\subsection*{e)}
+Nun wird ein System mit 2 Ladungen  betrachtet.
+\begin{align}
+	\rho_{i,j}=+1\delta(i-15)\delta(j-15)-1\delta(i-5)\delta(j-5)
+\end{align}
+Die Randbedingungen sind wieder so, dass das Potential verschwindet.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.75\textwidth]{../Plots/Plots_E.pdf}
+	\caption{Hier ist das Potential für 2 Ladungen dargestellt.}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.75\textwidth]{../Plots/Plots_E_E_Feld.pdf}
+	\caption{Hier ist der Betrag des E-Feldes für 2 Ladungen dargestellt.}
+\end{figure}
