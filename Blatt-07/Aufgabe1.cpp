@@ -9,10 +9,10 @@ void RND( int64_t& Seed , int64_t Modulo , int64_t Multiplikator , int64_t Summa
 }
 void Aufgabe( std::string Datei , int BinAnzahl , int64_t Seed , int64_t Modulo , int64_t Multiplikator , int64_t Summand , int Anzahl){
 	int64_t Seed_Temp = Seed;
-	int Bins[ BinAnzahl ];
+	int Histo[ BinAnzahl ];
 	for (int i = 0; i < BinAnzahl; ++i)
 	{
-		Bins[ i ] = 0 ;
+		Histo[ i ] = 0 ;
 	}
 	int bin;
 	std::fstream Save;
@@ -21,11 +21,11 @@ void Aufgabe( std::string Datei , int BinAnzahl , int64_t Seed , int64_t Modulo 
 	{
 		RND( Seed_Temp , Modulo , Multiplikator , Summand);
 		bin = floor( (double) Seed_Temp/Modulo*BinAnzahl);
-		Bins[ bin ] += 1;
+		Histo[ bin ] += 1;
 	}
 	for (int i = 0; i < BinAnzahl; ++i)
 	{
-		Save << (double) i/BinAnzahl << "\t" << Bins[ i ] << "\n";
+		Save << (double) i/BinAnzahl << "\t" << Histo[ i ] << "\n";
 	}
 	Save.close();
 
