@@ -8,6 +8,55 @@ void RND( int64_t& Seed , int64_t Modulo  , int64_t Multiplikator , int64_t Summ
 	Seed = (Multiplikator * Seed + Summand )%Modulo;
 }
 
+void Gaus_Box_Muller( std::string Datei , int Anzahl , int BinAnzahl ,  int64_t Seed , int64_t Modulo = 2147483648 - 1 , int64_t Multiplikator = 16807, int64_t Summand = 0 )
+{
+	double Zufall1 = 0.0;
+	double Zufall2 = 0.0;
+	double Zufall3 = 0.0;
+	int64_t Histo[ BinAnzahl ];
+	int64_t bin;
+	double Rquadrat;
+	double Zufallszahlen[ Anzahl ];
+	double min = 0.0;
+	double max = 0.0;
+	for (int i = 0; i < BinAnzahl ; ++i)
+	{
+		Histo[ i ] = 0;
+	}
+	for (int i = 0; i < Anzahl; ++i)
+	{
+		do{
+				RND( Seed , Modulo, Multiplikator , Summand );
+				Zufall1 = (double) 2.0 * Seed/Modulo - 1.0;
+				RND( Seed , Modulo, Multiplikator , Summand );
+				Zufall2 = (double) 2.0 * Seed/Modulo - 1.0;
+				Rquadrat = Zufall1*Zufall1 + Zufall2*Zufall2;
+		}while( Rquadrat > 1 );
+		Zufall2 = Zufall2 / sqrt(Rquadrat);
+		Zufall3 = sqrt( -2.0 * log( Rquadrat ) ) * Zufall2;
+		if (min > Zufall3)
+		{
+			min = Zufall3;
+		}
+		if (max < Zufall3)
+		{
+			max = Zufall3;
+		}
+		Zufallszahlen[ i ] = Zufall3;
+	}
+	for (int i = 0; i < Anzahl; ++i)
+	{
+		bin = floor( ((double) Zufallszahlen[ i ] - min)* BinAnzahl/( max - min ));
+		Histo[ bin ] += 1;
+	}
+	std::fstream Save;
+	Save.open( (Datei + ".txt").data() , std::ios::trunc | std::ios::out);
+	for (int i = 0; i < BinAnzahl; ++i)
+	{
+		Save << (double) i*( max - min)/ BinAnzahl    + min << "\t" << Histo[ i ] << "\t" << (double) Histo[ i ] /Anzahl * BinAnzahl/( max - min) << "\n";
+	}
+}
+
 void Neumann( std::string Datei , int Anzahl , int BinAnzahl ,  int64_t Seed , int64_t Modulo = 2147483648 - 1 , int64_t Multiplikator = 16807, int64_t Summand = 0)
 {
 	double Norm = (double) BinAnzahl/(Anzahl * M_PI);
@@ -37,7 +86,7 @@ void Neumann( std::string Datei , int Anzahl , int BinAnzahl ,  int64_t Seed , i
 	Save.open( (Datei + ".txt").data() , std::ios::trunc | std::ios::out);
 	for (int i = 0; i < BinAnzahl; ++i)
 	{
-		Save << (double) (i + 1) * M_PI / BinAnzahl << "\t" << Histo[ i ] << "\t" << (double) Histo[ i ]*Norm << "\n";
+		Save << (double) (i) * M_PI / BinAnzahl << "\t" << Histo[ i ] << "\t" << (double) Histo[ i ]*Norm << "\n";
 	}
 }
 
@@ -65,7 +114,7 @@ void Gaus_Grenzwert( std::string Datei , int N , int Anzahl , int BinAnzahl ,  i
 	Save.open( (Datei + ".txt").data() , std::ios::trunc | std::ios::out);
 	for (int j = 0; j < BinAnzahl; ++j)
 	{
-		Save << (double) (j + 1) * N /BinAnzahl - N  *0.5  << "\t" << Histo[ j ] << "\t" << (double)Histo[ j ]*Norm << "\n";
+		Save << (double) j * N /BinAnzahl - N  *0.5  << "\t" << Histo[ j ] << "\t" << (double)Histo[ j ]*Norm << "\n";
 	}
 	Save.close();
 }
@@ -90,13 +139,13 @@ void Trafo( std::string Datei , int Anzahl , int BinAnzahl ,  int64_t Seed , int
 	Save.open( (Datei + ".txt").data() , std::ios::trunc | std::ios::out);
 	for (int i = 0; i < BinAnzahl; ++i)
 	{
-		Save << (i+1)/BinAnzahl << "\t" << Histo[ i ] << "\t" << (double) Histo[ i ]*Norm<< "\n";
+		Save << (double) i/BinAnzahl << "\t" << Histo[ i ] << "\t" << (double) Histo[ i ]*Norm<< "\n";
 	}
 
 }
 int main(){
 
-	int Anzahl = 1e6;
+	int Anzahl = 1e7;
 	int BinAnzahl = 100;
 	int64_t Seed = 1234;
 	std::string Ergebnis = "Ergebnisse/Ergebnis_2_b";
@@ -107,6 +156,9 @@ int main(){
 	
 	Ergebnis = "Ergebnisse/Ergebnis_2_d";
 	Trafo( Ergebnis , Anzahl , BinAnzahl , Seed );
+
+	Ergebnis = "Ergebnisse/Ergebnis_2_a";
+	Gaus_Box_Muller( Ergebnis , Anzahl , BinAnzahl , Seed );
 
 	return 0;
 }
