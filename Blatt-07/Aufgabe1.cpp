@@ -4,11 +4,11 @@
 #include "fstream"
 #include <string>
 
-void RND( int64_t& Seed , int64_t Modulo , int64_t Multiplikator , int64_t Summand ){
+void RND( long long& Seed , long long Modulo , long long Multiplikator , long long Summand ){
 	Seed = (Multiplikator * Seed + Summand )%Modulo;
 }
-void Aufgabe( std::string Datei , int BinAnzahl , int64_t Seed , int64_t Modulo , int64_t Multiplikator , int64_t Summand , int Anzahl){
-	int64_t Seed_Temp = Seed;
+void Aufgabe( std::string Datei , int BinAnzahl , long long Seed , long long Modulo , long long Multiplikator , long long Summand , int Anzahl){
+	long long Seed_Temp = Seed;
 	int Histo[ BinAnzahl ];
 	for (int i = 0; i < BinAnzahl; ++i)
 	{
@@ -20,12 +20,12 @@ void Aufgabe( std::string Datei , int BinAnzahl , int64_t Seed , int64_t Modulo 
 	for (int i = 0; i < Anzahl; ++i)
 	{
 		RND( Seed_Temp , Modulo , Multiplikator , Summand);
-		bin = floor( (double) Seed_Temp/Modulo*BinAnzahl);
+		bin = floor( (double) ((double) Seed_Temp / Modulo ) * BinAnzahl );
 		Histo[ bin ] += 1;
 	}
 	for (int i = 0; i < BinAnzahl; ++i)
 	{
-		Save << (double) i/BinAnzahl << "\t" << Histo[ i ] << "\n";
+		Save << (double) i/BinAnzahl << "\t" << Histo[ i ] << "\t" << (double) Histo[ i ]*BinAnzahl/Anzahl << "\n";
 	}
 	Save.close();
 
@@ -33,7 +33,7 @@ void Aufgabe( std::string Datei , int BinAnzahl , int64_t Seed , int64_t Modulo 
 	Seed_Temp = Seed;
 	if (Anzahl > Modulo)
 	{
-		Anzahl = Modulo - 1;
+		Anzahl  = Modulo - 1;
 	}
 	for (int i = 0; i < Anzahl/2; ++i)
 	{
@@ -48,10 +48,10 @@ void Aufgabe( std::string Datei , int BinAnzahl , int64_t Seed , int64_t Modulo 
 
 int main(){
 	int Anzahl = 1e5;
-	int64_t Seed = 1234;
-	int64_t Modulo = 6075;
-	int64_t Multiplikator = 20;
-	int64_t Summand = 120;
+	long long Seed = 1234;
+	long long Modulo = 6075;
+	long long Multiplikator = 20;
+	long long Summand = 120;
 	int BinAnzahl = 10;
 	std::string Datei = "Ergebnisse/Ergebnis_1_1";
 	Aufgabe( Datei , BinAnzahl , Seed , Modulo , Multiplikator , Summand , Anzahl);
