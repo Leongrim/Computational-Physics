@@ -1,4 +1,32 @@
 % !TeX root = ../Notizen.tex
 
-\section*{Aufgabe1: }
-\subsection*{a)}
+\section*{Aufgabe 1: Bifurkationsdiagramme}
+	In dieser Aufgabe, werden die Bifurkationsdiagramme für zwei unterschiedliche Abbildungen erstellt.
+	\begin{align}
+		&\text{logistische Abbildung: }x_{n+1}=rx_n(1-x_n)\text{ wobei gilt }x_n\in[0,1]\label{eq:logistik}\\
+		&\text{kubische Abbildung: }x_{n+1}=rx_n-x^3_n\text{ wobei gilt }x_n\in[-\sqrt{1+r},\sqrt{1+r}]
+	\end{align}
+	Durch diese Iteration lassen sich Fixpunkte $f(x^*)=x^*$ finden.
+	Für $r>0$ gibt es nur einen Fixpunkt $x^*=0$
+	und für $r>1$ergibt sich ein weiterer Punkt. 
+	Interessant wird das dieses Verfahren für große $r$ keine Fixpunkte mehr findet sondern nur noch Orbits, auf denen um den Fixpunkt oszilliert wird.
+	Ein Beispiel ist in \cref{fig:Orbit}.
+	Mit weiter anwachsenden $r$ nimmt die zahl der Orbits immer weiter zu.
+	Jeder Orbit $x_n$ ist ein Teil des Bifurkationsdiagramms.
+	Dazu wird eine Funktion geschrieben, der eine Anzahl an Iterationen über geben wird, und wie viele Werte von aus Gespeichert werden sollen.
+	Dieser Ansatz kann verwendet werden unter der Annahme das die Anzahl der Iterationen groß genug ist, dass sich der Algorithmus schon in der Oszilation befindet
+	\begin{figure}
+		\centering
+		\includegraphics[width = 0.5\textwidth]{../Plots/Aufgabe1a/Plot_70.png}\caption{Ein Beispiel Plot für ein Orbit.}\label{fig:Orbit}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[width = \textwidth]{../Plots/Plot_1_a.png}
+		\caption{Hier ist das Ergebnis für die logistische Abbildung dargestellt.}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[width = \textwidth]{../Plots/Plot_1_b.png}
+		\caption{Hier ist das Ergebnis für die kubische Abbildung dargestellt.}
+	\end{figure}
+	Für die Ergebnisse wurden 1000 Iterationsschritte durchgeführt und die letzten 500 werden gespeichert.

@@ -2,28 +2,35 @@ CC = g++
 PY = python
 CFLAGS = -std=c++11 -Wall -O3 -march=native -c
 LDFLAGS =
+AUFGABE0_SOURCES = Aufgabe0.cpp
 AUFGABE1_SOURCES = Aufgabe1.cpp
 AUFGABE2_SOURCES = Aufgabe2.cpp
 
+AUFGABE0_OBJECTS = $(AUFGABE0_SOURCES:.cpp=.o)
 AUFGABE1_OBJECTS = $(AUFGABE1_SOURCES:.cpp=.o)
 AUFGABE2_OBJECTS = $(AUFGABE2_SOURCES:.cpp=.o)
 
 EXECUTABLE = program1
 AUFGABE2_EXECUTABLE = program2
+AUFGABE0_EXECUTABLE = program0
 
-.PHONY: all aufgabe1 aufgabe2
+.PHONY: all aufgabe0 aufgabe1 aufgabe2
 
-all: aufgabe1 aufgabe2
+all: aufgabe0 aufgabe1 aufgabe2
 
 aufgabe1: $(EXECUTABLE)
 
 aufgabe2: $(AUFGABE2_EXECUTABLE)
+
+aufgabe0: $(AUFGABE0_EXECUTABLE)
 
 $(EXECUTABLE): $(AUFGABE1_OBJECTS)
 	$(CC) -o $@ $(AUFGABE1_OBJECTS) $(LDFLAGS)
 
 $(AUFGABE2_EXECUTABLE): $(AUFGABE2_OBJECTS)
 	$(CC) -o $@ $(AUFGABE2_OBJECTS) $(LDFLAGS)  
+$(AUFGABE0_EXECUTABLE): $(AUFGABE0_OBJECTS)
+	$(CC) -o $@ $(AUFGABE0_OBJECTS) $(LDFLAGS) 
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
