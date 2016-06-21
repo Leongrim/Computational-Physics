@@ -29,6 +29,14 @@ double Nulstellen( int Anzahl , double StartX , double AnfangsWert , double EndW
 	double Z_n;
 	double Genauigkeit = 1e-7;
 	do{
+		if (std::abs(X_n) < Genauigkeit)
+		{
+			return WertX;
+		}
+		if (std::abs(Y_n) < Genauigkeit)
+		{
+			return WertY;
+		}
 		WertZ = (WertX*Y_n - WertY*X_n)/(Y_n - X_n);
 		Z_n = g_n_r( StartX , WertZ , Anzahl );
 		if (X_n*Z_n < 0)
@@ -39,7 +47,7 @@ double Nulstellen( int Anzahl , double StartX , double AnfangsWert , double EndW
 			WertX = WertZ;
 			X_n = g_n_r( StartX , WertX , Anzahl );
 		}
-	}while(abs((WertX - WertY)) > Genauigkeit);
+	}while(std::abs((WertX - WertY)) > Genauigkeit);
 	return WertX;
 }
 void AufgabenA(){

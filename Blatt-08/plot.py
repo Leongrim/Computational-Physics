@@ -70,8 +70,9 @@ plt.plot( r , x , "k." , markersize=1)
 plt.xlabel(r"$r$")
 plt.ylabel(r"$x$")
 plt.grid()
-
 plt.savefig("Plots/Plot_1_a.png")
+plt.xlim(3.8,3.9)
+plt.show()
 plt.clf()
 
 r , x  = np.genfromtxt( "Ergebnisse/Ergebnis_1_B.txt" , unpack=True)
