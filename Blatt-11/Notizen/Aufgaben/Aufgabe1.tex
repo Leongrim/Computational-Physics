@@ -1,0 +1,23 @@
+% !TeX root = ../Notizen.tex
+
+\section*{Aufgabe 1: Monte-Carlo-Simulation eines einzelnen Spins}
+Es soll mit Hilfe des Metropolis-Algorithmus ein einzelner Spin $s=\pm1$ in einem äußeren Magnetfeld $H$ mit der Energie \[\mathcal{H}=-sH\] simuliert werden.
+Dem Metropolis-Algorithmus soll ein Spin-Flip $s\rightarrow-s$ angeboten werden.
+\subsection*{a)}
+Zunächst soll analytisch der Wert der Magnetisierung \[m=\braket{s}\] als Funktion des Magnetfeldes $H$ berechnet werden.
+Dazu wird zunächst die Zustandssumme $Z$ bestimmt: \[Z=\sum_{i}\mathrm{e}^{-\beta\mathcal{H}(i)}=\sum_{i}\mathrm{e}^{\beta s(i)H}=\frac{1}{2}\left(\mathrm{e}^{\beta H}+\mathrm{e}^{-\beta H}\right)=\cosh(\beta H),~~~\text{mit}~\beta=\frac{1}{k_\text{B}T}.\]
+Der Ensemble-Mittelwert der Spin-Variablen $s$ ist
+\begin{align*}\braket{s}&=\sum_{i}\frac{1}{Z}\mathrm{e}^{-\beta\mathcal{H}(i)}s(i)=\sum_{i}\frac{1}{\cosh(\beta H)}\mathrm{e}^{\beta s(i)H}s(i)=\frac{1}{\cosh(\beta H)}\cdot\frac{1}{2}\left(\mathrm{e}^{\beta H}-\mathrm{e}^{-\beta H}\right)\\
+&=\frac{\sinh(\beta H)}{\cosh(\beta H)}=\tanh(\beta H)=m(H).\end{align*}
+
+\subsection*{b)}
+Nun soll numerisch die Magnetisierung $m$ berechnet werden, wobei $\beta=1$ gesetzt wird.
+Dazu werden die Monte-Carlo-Simulationen mit $\num{e4}$ Werten $H\in[-5,\,5]$ mit je $\num{e5}$ Zeitschritten ausgeführt.
+Das Ergebnis ist in \cref{fig:Magnetisierung} zu sehen.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{../Magnetisierung.pdf}
+\caption{Magnetisierung $m$ in Abhängigkeit vom Magnetfeld $H$.}
+\label{fig:Magnetisierung}
+\end{figure}

@@ -1,0 +1,5 @@
+[0] Config.pm:318> INFO - This is Biber 1.8
+[0] Config.pm:321> INFO - Logfile is 'Notizen.blg'
+[48] biber:275> INFO - === Mi Jul  6, 2016, 10:35:37
+[128] Utils.pm:185> ERROR - Cannot find control file 'Notizen.bcf'! - did you pass the "backend=biber" option to BibLaTeX?
+[128] Biber.pm:109> INFO - ERRORS: 1
