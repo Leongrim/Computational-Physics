@@ -2,3 +2,51 @@
 
 \section*{Aufgabe1: }
 \subsection*{a)}
+Die Ausrichtungen eines Moleküls soll zufällig erfolge.
+Dabei sollen die Ausrichtung mithilfe von Kugelkoordinaten der Einheitskugel erfolgen, wo alle Punkte gleich wahrscheinlich sind.
+\begin{align}
+	\begin{pmatrix}
+		x\\ y\\ z
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+	\cos\phi\sin\theta\\
+	\sin\phi\sin\theta\\
+	\cos\theta
+	\end{pmatrix}
+\end{align}
+Wird die Kugel als Schichten von Kreisen gedacht, so lässt sich erkennen das der Umfang der Kreise vom Winkel $\theta $ abhängt.
+\begin{align}
+	U=2\pi \sin\theta
+\end{align}
+Daraus lässt sich eine Verteilung für die Winkel schließen
+\begin{align}
+	P(\theta)=\frac{1}{2}\sin\theta, \text{ für } \theta\in[0,\pi]
+\end{align}
+Diese Verteilung lässt sich realisieren mithilfe der Transformationsmethode
+\begin{align}
+	\int\limits_{0}^{\theta_j}\frac{1}{2}\sin\theta d\theta = u_j\\
+	\Rightarrow \theta_j =  \cos(-2u_j +1)
+\end{align}
+wobei $u_j$ eine gleichverteilte Zufallszahl aus 0 und 1 ist.
+\begin{figure}
+	\centering
+	\includegraphics[width = 0.6 \textwidth]{../Plots/Plot_1_A.pdf}
+	\caption{Hier ist die Erzeugte Verteilung für $\theta$ dargestellt.}
+\end{figure}
+\newpage
+\subsection*{b)}
+Als nächstes wird die Verteilung von
+\begin{align}
+	\omega(\theta) = \frac{1}{2}(3\cos^2\theta-1)
+\end{align}
+bestimmt.
+Der Mittelwert ist 
+\begin{align}
+	\left< \omega \right> = 0,00246012.
+\end{align}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.6\textwidth]{../Plots/Plot_1_B.pdf}
+	\caption{Hier ist die Verteilung für $\omega(\theta)$ dargestellt.}
+\end{figure}
