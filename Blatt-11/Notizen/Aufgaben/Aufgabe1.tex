@@ -13,9 +13,28 @@ Der Ensemble-Mittelwert der Spin-Variablen $s$ ist
 \subsection*{b)}
 Nun soll numerisch die Magnetisierung $m$ berechnet werden, wobei $\beta=1$ gesetzt wird.
 Dazu werden die Monte-Carlo-Simulationen mit $\num{e4}$ Werten $H\in[-5,\,5]$ mit je $\num{e5}$ Zeitschritten ausgeführt.
-Das Ergebnis ist in \cref{fig:Magnetisierung} zu sehen.
+Das Ergebnis ist in \cref{fig:Magnetisierung} zu sehen.\newpage
 
-\begin{figure}
+Das Verfahren funktioniert folgendermaßen:
+\begin{enumerate}
+\setcounter{enumi}{-1}
+\item Initialisierung: Zur Zeit $t$ befinde sich das System im Zustand $i(t)=i$, hier Spin $s=+1$.
+\item Biete MC-move $i\rightarrow j$ an, hier $s=+1\rightarrow s'=-1$.
+\item Akzeptiere vorgeschlagenen Move:
+\begin{enumerate}
+\item Berechne $\Delta E=\mathcal{H}(j)-\mathcal{H}(i)$, hier $\Delta E=\mathcal{H}(s')-\mathcal{H}(s)=2sH$.
+\item Immer akzeptieren, wenn $\Delta E<0$.
+\item Wenn $\Delta E>0$, ziehe gleichverteilte Zufallszahl $p\in[0,\,1]$ und berechne $\mathrm{e}^{-\beta\Delta E}$. Akzeptieren, wenn $p<\mathrm{e}^{-\beta\Delta E}$, sonst ablehnen.
+\end{enumerate}
+\item Akzeptieren $\rightarrow$ neuer Zustand $i(t+\Delta t)=j$\\Ablehnen $\rightarrow$ neuer Zustand $i(t+\Delta t)=i=$ alter Zustand
+\end{enumerate}
+Danach wird in einer Zeitschleife wieder zu 1. gesprungen. Während der Schleife (jeweils nach 3.) wird gemessen:
+\begin{enumerate}[resume]
+\item Messung: MC-Mittel über gesamplete Zustände (nach $t_\text{MC}$ MC-Schritten)
+\[\braket{O}_\text{MC}=\frac{1}{t_\text{MC}}\sum_{n=1}^{t_\text{MC}}O(i(n\Delta t))=\braket{O},~~~\text{hier }O(i)=s~\text{und }\braket{s}=m.\]
+\end{enumerate}
+
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{../Magnetisierung.pdf}
 \caption{Magnetisierung $m$ in Abhängigkeit vom Magnetfeld $H$.}
