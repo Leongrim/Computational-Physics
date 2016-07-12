@@ -15,21 +15,51 @@ plt.grid()
 plt.xlabel(r'$H$')
 plt.ylabel(r'$m$')
 plt.legend(loc='best')
-plt.savefig("Magnetisierung.pdf")
+plt.savefig("Plots/1_B_Magnetisierung.pdf")
 plt.close()
 
-for i in [0, 10, 100, 1000, 10000, 11000, 12000, 15000, 20000, 50000, 100000, 1000000, 10000000]:
-	Matrix = np.genfromtxt("Ergebnisse/Ergebnis_2_A_geordnet_"+str(i)+".txt", unpack=True)
-	plt.imshow(Matrix, interpolation='nearest', vmin=-1, vmax=1)
-	plt.xlabel(r'$x$')
-	plt.ylabel(r'$y$')
-	plt.title(r'$t_\mathrm{MC}=$'+str(i))	
-	plt.savefig("Plots/Momentaufnahme_geordnet_"+str(i)+".pdf")
+Matrix = np.genfromtxt("Ergebnisse/Ergebnis_2_A_geordnet_t0.txt", unpack=True)
+plt.imshow(Matrix, interpolation='nearest', vmin=-1, vmax=1)
+plt.xlabel(r'$x$')
+plt.ylabel(r'$y$')
+plt.title(r'$t_\mathrm{MC}=0$')	
+plt.savefig("Plots/2_A_Momentaufnahme_geordnet_t0.pdf")
 
-for i in [0, 10, 100, 1000, 10000, 11000, 12000, 15000, 20000, 50000, 100000, 1000000, 10000000]:
-	Matrix = np.genfromtxt("Ergebnisse/Ergebnis_2_A_zufall_"+str(i)+".txt", unpack=True)
+for i in [10, 100, 1000, 10000, 100000, 1000000, 10000000]:
+	Matrix = np.genfromtxt("Ergebnisse/Ergebnis_2_A_geordnet_t"+str(i)+"_kBT1.txt", unpack=True)
 	plt.imshow(Matrix, interpolation='nearest', vmin=-1, vmax=1)
 	plt.xlabel(r'$x$')
 	plt.ylabel(r'$y$')
 	plt.title(r'$t_\mathrm{MC}=$'+str(i))	
-	plt.savefig("Plots/Momentaufnahme_zufall_"+str(i)+".pdf")
+	plt.savefig("Plots/2_A_Momentaufnahme_geordnet_t"+str(i)+"_kBT1.pdf")
+
+for i in [10, 100, 1000, 10000, 100000, 1000000, 10000000]:
+	Matrix = np.genfromtxt("Ergebnisse/Ergebnis_2_A_geordnet_t"+str(i)+"_kBT3.txt", unpack=True)
+	plt.imshow(Matrix, interpolation='nearest', vmin=-1, vmax=1)
+	plt.xlabel(r'$x$')
+	plt.ylabel(r'$y$')
+	plt.title(r'$t_\mathrm{MC}=$'+str(i))	
+	plt.savefig("Plots/2_A_Momentaufnahme_geordnet_t"+str(i)+"_kBT3.pdf")
+
+Matrix = np.genfromtxt("Ergebnisse/Ergebnis_2_A_zufall_t0.txt", unpack=True)
+plt.imshow(Matrix, interpolation='nearest', vmin=-1, vmax=1)
+plt.xlabel(r'$x$')
+plt.ylabel(r'$y$')
+plt.title(r'$t_\mathrm{MC}=0$')	
+plt.savefig("Plots/2_A_Momentaufnahme_zufall_t0.pdf")
+
+for i in [10, 100, 1000, 10000, 100000, 1000000, 10000000]:
+	Matrix = np.genfromtxt("Ergebnisse/Ergebnis_2_A_zufall_t"+str(i)+"_kBT1.txt", unpack=True)
+	plt.imshow(Matrix, interpolation='nearest', vmin=-1, vmax=1)
+	plt.xlabel(r'$x$')
+	plt.ylabel(r'$y$')
+	plt.title(r'$t_\mathrm{MC}=$'+str(i))	
+	plt.savefig("Plots/2_A_Momentaufnahme_zufall_t"+str(i)+"_kBT1.pdf")
+
+for i in [10, 100, 1000, 10000, 100000, 1000000, 10000000]:
+	Matrix = np.genfromtxt("Ergebnisse/Ergebnis_2_A_zufall_t"+str(i)+"_kBT3.txt", unpack=True)
+	plt.imshow(Matrix, interpolation='nearest', vmin=-1, vmax=1)
+	plt.xlabel(r'$x$')
+	plt.ylabel(r'$y$')
+	plt.title(r'$t_\mathrm{MC}=$'+str(i))	
+	plt.savefig("Plots/2_A_Momentaufnahme_zufall_t"+str(i)+"_kBT3.pdf")

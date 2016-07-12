@@ -2,6 +2,7 @@
 #include <cmath>
 #include <random>
 #include <fstream>
+#include <string>
 
 //Monte-Carlo-Simulation des zweidimensionalen Ising-Modells
 
@@ -31,10 +32,40 @@ double Hamilton(double spins[][100], int x_pos, int y_pos){//Berechnung der Ener
 	return H;
 }
 
+void momentaufnahme(double spins[][100], const char* Dateiname, int Zeitschritte, double beta){
+	std::fstream Datei;
+
+	double deltaE;
+	int t_MC = Zeitschritte;//Anzahl der Zeitschritte
+	for(int t = 0; t < t_MC; ++t){//Schleife zum Durchlaufen der Zeitschritte
+		int x_pos = RANDOM_int(0, 99);
+		int y_pos = RANDOM_int(0, 99);
+		deltaE = -Hamilton(spins, x_pos, y_pos);//Berechne Energiedifferenz
+		spins[x_pos][y_pos] *= -1.0;
+		deltaE += Hamilton(spins, x_pos, y_pos);
+		if(deltaE < 0.0){}//In diesem Fall immer akzeptieren
+		else if(deltaE >= 0.0){//In diesem Fall Vergleich von e^(-beta deltaE) mit Zufallszahl RANDOM()
+			if(RANDOM() < exp(-beta*deltaE)){}//In diesem Fall wird akzeptiert
+			else{
+				spins[x_pos][y_pos] *= -1.0;//sonst wird abgelehnt
+			}
+		}
+	}
+
+	Datei.open(Dateiname, std::ios::trunc | std::ios::out);
+	for(int i = 0; i < 100; ++i){
+		for(int j = 0; j < 100; ++j){
+			Datei << spins[i][j] << "\t";
+		}
+		Datei << "\n";
+	}
+	Datei.close();
+
+}
+
 int main(){
 	std::fstream Datei;
-	Datei.open("Ergebnisse/Ergebnis_2_A_geordnet_0.txt", std::ios::trunc | std::ios::out);
-	//Datei << "#Position_x\tPosition_y\tSpin\n";
+	Datei.open("Ergebnisse/Ergebnis_2_A_geordnet_t0.txt", std::ios::trunc | std::ios::out);
 	//Initialisierung für geordneten Anfangszustand
 	double spins_geordnet[100][100];
 	for(int i = 0; i < 100; ++i){
@@ -46,97 +77,56 @@ int main(){
 	}
 	Datei.close();
 
-	int t_MC = 10;//Anzahl der Zeitschritte
-	for(int t = 0; t < t_MC; ++t){//Schleife zum Durchlaufen der Zeitschritte
-		int x_pos = RANDOM_int(0, 99);
-		//std::cout << x_pos << "\n";
-		int y_pos = RANDOM_int(0, 99);
-		//std::cout << y_pos << "\n";
-		double deltaE = 0.0;
-		deltaE -= Hamilton(spins_geordnet, x_pos, y_pos);//Berechne Energiedifferenz
-		spins_geordnet[x_pos][y_pos] *= -1.0;
-		deltaE += Hamilton(spins_geordnet, x_pos, y_pos);
-		if(deltaE < 0.0){//In diesem Fall immer akzeptieren
-			//spins_geordnet[x_pos][y_pos] *= -1.0;
-			//spin = -spin;//Zustand wird geändert
-		}
-		else if(deltaE >= 0.0){//In diesem Fall Vergleich von e^(-beta deltaE) mit Zufallszahl RANDOM()
-			if(RANDOM() < exp(-deltaE)){//In diesem Fall wird akzeptiert
-				//spins_geordnet[x_pos][y_pos] *= -1.0;
-				//spin = -spin;//Zustand wird geändert
-			}
-			else{
-				spins_geordnet[x_pos][y_pos] *= -1.0;//sonst wird abgelehnt
-			}
-		}
-	}
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t10_kBT1.txt", 10, 1.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t100_kBT1.txt", 100, 1.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t1000_kBT1.txt", 1000, 1.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t10000_kBT1.txt", 10000, 1.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t100000_kBT1.txt", 100000, 1.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t1000000_kBT1.txt", 1000000, 1.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t10000000_kBT1.txt", 10000000, 1.0);
 
-	Datei.open("Ergebnisse/Ergebnis_2_A_geordnet_10.txt", std::ios::trunc | std::ios::out);
-	for(int i = 0; i < 100; ++i){
-		for(int j = 0; j < 100; ++j){
-			Datei << spins_geordnet[i][j] << "\t";
-		}
-		Datei << "\n";
-	}
-	Datei.close();
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t10_kBT3.txt", 10, 1.0/3.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t100_kBT3.txt", 100, 1.0/3.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t1000_kBT3.txt", 1000, 1.0/3.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t10000_kBT3.txt", 10000, 1.0/3.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t100000_kBT3.txt", 100000, 1.0/3.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t1000000_kBT3.txt", 1000000, 1.0/3.0);
+	momentaufnahme(spins_geordnet, "Ergebnisse/Ergebnis_2_A_geordnet_t10000000_kBT3.txt", 10000000, 1.0/3.0);
 
-
-	Datei.open("Ergebnisse/Ergebnis_2_A_zufall_0.txt", std::ios::trunc | std::ios::out);
+	Datei.open("Ergebnisse/Ergebnis_2_A_zufall_t0.txt", std::ios::trunc | std::ios::out);
 	Datei << "#Position_x\tPosition_y\tSpin\n";
 	//Initialisierung für zufälligen Anfangszustand
 	double spins_zufall[100][100];
-	//int count_plus = 0;
-	//int count_minus = 0;
 	for(int i = 0; i < 100; ++i){
 		for(int j = 0; j < 100; ++j){
 			double rnd = RANDOM_int(0, 1);
 			if(rnd == 1){
 				spins_zufall[i][j] = 1.0;
-				//count_plus += 1;
 			}
 			else if(rnd == 0){
 				spins_zufall[i][j] = -1.0;
-				//count_minus += 1;
 			}
 			Datei << spins_zufall[i][j] << "\t";
 		}
 		Datei << "\n";
 	}
-	//std::cout << count_plus << "\t" << count_minus << std::endl;
 	Datei.close();
 
-	for(int t = 0; t < t_MC; ++t){//Schleife zum Durchlaufen der Zeitschritte
-		int x_pos = RANDOM_int(0, 99);
-		//std::cout << x_pos << "\n";
-		int y_pos = RANDOM_int(0, 99);
-		//std::cout << y_pos << "\n";
-		double deltaE = 0.0;
-		deltaE -= Hamilton(spins_zufall, x_pos, y_pos);//Berechne Energiedifferenz
-		spins_zufall[x_pos][y_pos] *= -1.0;
-		deltaE += Hamilton(spins_zufall, x_pos, y_pos);
-		if(deltaE < 0.0){//In diesem Fall immer akzeptieren
-			//spins_zufall[x_pos][y_pos] *= -1.0;
-			//spin = -spin;//Zustand wird geändert
-		}
-		else if(deltaE >= 0.0){//In diesem Fall Vergleich von e^(-beta deltaE) mit Zufallszahl RANDOM()
-			if(RANDOM() < exp(-deltaE)){//In diesem Fall wird akzeptiert
-				//spins_zufall[x_pos][y_pos] *= -1.0;
-				//spin = -spin;//Zustand wird geändert
-			}
-			else{
-				spins_zufall[x_pos][y_pos] *= -1.0;//sonst wird abgelehnt
-			}
-		}
-	}
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t10_kBT1.txt", 10, 1.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t100_kBT1.txt", 100, 1.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t1000_kBT1.txt", 1000, 1.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t10000_kBT1.txt", 10000, 1.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t100000_kBT1.txt", 100000, 1.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t1000000_kBT1.txt", 1000000, 1.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t10000000_kBT1.txt", 10000000, 1.0);
 
-	Datei.open("Ergebnisse/Ergebnis_2_A_zufall_10.txt", std::ios::trunc | std::ios::out);
-	for(int i = 0; i < 100; ++i){
-		for(int j = 0; j < 100; ++j){
-			Datei << spins_zufall[i][j] << "\t";
-		}
-		Datei << "\n";
-	}
-	Datei.close();
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t10_kBT3.txt", 10, 1.0/3.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t100_kBT3.txt", 100, 1.0/3.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t1000_kBT3.txt", 1000, 1.0/3.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t10000_kBT3.txt", 10000, 1.0/3.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t100000_kBT3.txt", 100000, 1.0/3.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t1000000_kBT3.txt", 1000000, 1.0/3.0);
+	momentaufnahme(spins_zufall, "Ergebnisse/Ergebnis_2_A_zufall_t10000000_kBT3.txt", 10000000, 1.0/3.0);
 
 
 	return 0;
