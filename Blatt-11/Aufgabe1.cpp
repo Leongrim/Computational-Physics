@@ -45,6 +45,7 @@ int main(){
 	}
 
 	Datei.close();
+	std::cout << 2.0/(log(1.0+sqrt(2.0))) << "\n";
 
 	return 0;
 }

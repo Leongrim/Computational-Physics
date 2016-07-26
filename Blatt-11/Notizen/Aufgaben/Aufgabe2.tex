@@ -1,4 +1,224 @@
 % !TeX root = ../Notizen.tex
 
-\section*{Aufgabe 2: )}
+\section*{Aufgabe 2: MC-Simulation des zweidimensionalen Ising-Modells}
+Es soll mithilfe des Metropolis-Algorithmus' das zweidimensionale Ising-Modell ohne Magnetfeld simuliert werden.
+Die Energie betrage \[\mathcal{H}=-J\sum_{i,j~\text{n.N.}}s_is_j,\]
+wobei nur über nächste Nachbarn (n.N.) summiert wird und $J=1$ betrachtet werden soll.
+Außerdem soll ein System aus einem Quadratgitter der Größe $100\times100$ mit periodischen Randbedingungen untersucht werden.
+Im Metropolis-Algorithmus werden Spin-Flips zufällig ausgewählter Spins angeboten.
+Als Anfangsbedingungen werden zum einen völlig geordnete und zum anderen zufällig angeordnete Spins gewählt.
+Nach einer hinreichend langen Aufwärmphase sollen \num{e5} Sweeps durchgeführt werden, in denen im Mittel jedem Spin einmal ein Flip angeboten wird.
 \subsection*{a)}
+Zunächst sollen graphische Momentaufnahmen des Systems für die Fälle $k_\text{B}T=1$ und $k_\text{B}T=3$ generiert werden.
+Diese sind in \cref{fig:moment_geordnet_kBT1,fig:moment_geordnet_kBT3,fig:moment_zufall_kBT1,fig:moment_zufall_kBT3} zu sehen.
+Es ist zu erkennen, dass für den geordneten Anfangszustand bei niedriger Temperatur ($k_\text{B}T=1$) nahezu keine Veränderung geschieht bis ein paar einzelne Spins, die flippen (siehe \cref{fig:moment_geordnet_kBT1}).
+Bei höherer Temperatur ($k_\text{B}T=3$) ist dagegen bei einer großen Anzahl an Zeitschritten schon eine große Veränderung zu erkennen (siehe \cref{fig:moment_geordnet_kBT3}).
+Die Spins scheinen die beiden Zustände mit gleicher Wahrscheinlichkeit anzunehmen.
+Bei zufällig angeordnetem Anfangszustand und kleiner Temperatur ($k_\text{B}T=1$) bilden sich zusammenhängende Bereiche, Domänen, in denen eine Spin-Konfiguration bevorzugt ist (siehe \cref{fig:moment_zufall_kBT1}).
+Für die höhere Temperatur ($k_\text{B}T=3$) stellt sich zunächst ein stark geordneter Zustand ein, der sich anschließend so verhält wie der stark geordnete Anfangszustand.
+\begin{figure}
+\centering
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t0.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t1_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t10_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t100_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t1000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t10000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t100000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t1000000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t10000000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t100000000_kBT1.pdf}
+\caption{Momentaufnahmen des Systems für einen geordneten Anfangszustand und $k_\text{B}T=1$.}
+\label{fig:moment_geordnet_kBT1}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t0.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t1_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t10_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t100_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t1000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t10000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t100000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t1000000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t10000000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_geordnet_t100000000_kBT3.pdf}
+\caption{Momentaufnahmen des Systems für einen geordneten Anfangszustand und $k_\text{B}T=3$.}
+\label{fig:moment_geordnet_kBT3}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t0.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t1_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t10_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t100_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t1000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t10000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t100000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t1000000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t10000000_kBT1.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t100000000_kBT1.pdf}
+\caption{Momentaufnahmen des Systems für einen zufälligen Anfangszustand und $k_\text{B}T=1$.}
+\label{fig:moment_zufall_kBT1}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t0.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t1_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t10_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t100_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t1000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t10000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t100000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t1000000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t10000000_kBT3.pdf}
+\includegraphics[width=0.4\textwidth]{../Plots/2_A_Momentaufnahme_zufall_t100000000_kBT3.pdf}
+\caption{Momentaufnahmen des Systems für einen zufälligen Anfangszustand und $k_\text{B}T=3$.}
+\label{fig:moment_zufall_kBT3}
+\end{figure}
+
+\subsection*{b)}
+Nun soll die Äquilibrierungsphase untersucht werden.
+Dazu wird die mittlere Energie pro Spin \[e(t)=\frac{E(t)}{N}=\frac{\braket{\mathcal{H}(t)}}{N}\]
+in Abhängigkeit von der Simulationszeit $t$ gemessen.
+$N=\num{10000}$ ist die Gesamtzahl der Spins.
+Die Ergebnisse sind in \cref{fig:energie_kBT1,fig:energie_kBT2.27,fig:energie_kBT3} dargestellt.
+Nach der Äquilibrierung sollen die beiden Anfangskonfigurationen näherungsweise übereinstimmen.
+In \cref{fig:energie_kBT1} ist demnach nach \num{20000} Sweeps die Äquilibrierung erreicht.
+Für die kritische Temperatur $T\approx\num{2.27}$ dauert es hingegen etwa \num{100000} Sweeps (siehe \cref{fig:energie_kBT2.27}).
+Bei höherer Temperatur sind es \num{1500} Sweeps (siehe \cref{fig:energie_kBT3}).
+Nach diesen Zeiten ist das Ergebnis unabhängig von den Anfangsbedingungen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../Plots/2_B_Energie_geordnet_kBT1zufall_kBT1.pdf}
+\caption{Mittlere Energie $e$ pro Spin in Abhängigkeit vom Zeitschritt $t$ für $k_\text{B}T=1$.}
+\label{fig:energie_kBT1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../Plots/2_B_Energie_geordnet_kBT227zufall_kBT227.pdf}
+\caption{Mittlere Energie $e$ pro Spin in Abhängigkeit vom Zeitschritt $t$ für $k_\text{B}T=\num{2,27}$.}
+\label{fig:energie_kBT2.27}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../Plots/2_B_Energie_geordnet_kBT3zufall_kBT3.pdf}
+\caption{Mittlere Energie $e$ pro Spin in Abhängigkeit vom Zeitschritt $t$ für $k_\text{B}T=3$.}
+\label{fig:energie_kBT3}
+\end{figure}
+
+\subsection*{c)}
+Für die Zeit nach der Äquilibrierung werden die Mittelwerte der Energie wie in Aufgabenteil b) und diejenigen der Magnetisierung \[\braket{m}=\left<\frac{1}{N}\sum_is_i\right>\] sowie die des Betrags \[\braket{|m|}=\left<\frac{1}{N}\left|\sum_is_i\right|\right>\] pro Spin berechnet.
+Die Diagramme für die Energien sind in \cref{fig:energie_kBT1_aequi,fig:energie_kBT2.27_aequi,fig:energie_kBT3_aequi} zu sehen.
+Diejenigen der Magnetisierung und des Betrags der Magnetisierung sind in \cref{fig:magnetisierung_geordnet_kBT1,fig:magnetisierung_geordnet_kBT227,fig:magnetisierung_geordnet_kBT3,fig:magnetisierung_zufall_kBT1,fig:magnetisierung_zufall_kBT227,fig:magnetisierung_zufall_kBT3} dargestellt.
+Zunächst werden die Ergebnisse mit geordnetem Anfangszustand betrachtet.
+Für $k_\text{B}T=1$ fluktuiert die Magnetisierung $\braket{m}$ in Abhängigkeit von der Simulationszeit $t$ zwischen drei Niveaus (siehe \cref{fig:magnetisierung_geordnet_kBT1}), wobei das mittlere Niveau am meisten besetzt ist.
+Im Wesentlichen ist der Wert jedoch konstant bei $1$.
+Für die kritische Temperatur $k_\text{B}T\approx\num{2.27}$ steigt der Wert der Magnetisierung $\braket{m}$ nahezu linear mit der Zeit $t$ (siehe \cref{fig:magnetisierung_geordnet_kBT227}).
+Bei $k_\text{B}T=3$ fluktuiert die Magnetisierung $\braket{m}$ sehr stark.
+Für einen zufälligen Anfangszustand verhält sie sich sehr ähnlich außer bei $k_\text{B}T=1$, wo sie langsam schwankt, aber nicht auf diskreten Niveaus.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../Plots/2_B_Energie_geordnet_aequilibriert_kBT1.pdf}
+\includegraphics[width=\textwidth]{../Plots/2_B_Energie_zufall_aequilibriert_kBT1.pdf}
+\caption{Mittlere Energie $e$ pro Spin in Abhängigkeit vom Zeitschritt $t$ für $k_\text{B}T=1$ für den geordneten Anfangszustand (oben) und den zufälligen Anfangszustand (unten).}
+\label{fig:energie_kBT1_aequi}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../Plots/2_B_Energie_geordnet_kBT227zufall_kBT227_aequilibriert.pdf}
+\caption{Mittlere Energie $e$ pro Spin in Abhängigkeit vom Zeitschritt $t$ für $k_\text{B}T=\num{2,27}$.}
+\label{fig:energie_kBT2.27_aequi}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../Plots/2_B_Energie_geordnet_aequilibriert_kBT3.pdf}
+\includegraphics[width=\textwidth]{../Plots/2_B_Energie_zufall_aequilibriert_kBT3.pdf}
+\caption{Mittlere Energie $e$ pro Spin in Abhängigkeit vom Zeitschritt $t$ für $k_\text{B}T=3$ für den geordneten Anfangszustand (oben) und den zufälligen Anfangszustand (unten).}
+\label{fig:energie_kBT3_aequi}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_Magnetisierung_geordnet_aequilibriert_kBT1.pdf}
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_|Magnetisierung|_geordnet_aequilibriert_kBT1.pdf}
+\caption{Magnetisierung $\braket{m}$ und deren Betrag $\braket{|m|}$ in Abhängigkeit von der Simulationszeit $t$ für $k_\text{B}T=1$ bei geordnetem Anfangszustand.}
+\label{fig:magnetisierung_geordnet_kBT1}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_Magnetisierung_geordnet_aequilibriert_kBT227.pdf}
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_|Magnetisierung|_geordnet_aequilibriert_kBT227.pdf}
+\caption{Magnetisierung $\braket{m}$ und deren Betrag $\braket{|m|}$ in Abhängigkeit von der Simulationszeit $t$ für $k_\text{B}T=\num{2,27}$ bei geordnetem Anfangszustand.}
+\label{fig:magnetisierung_geordnet_kBT227}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_Magnetisierung_geordnet_aequilibriert_kBT3.pdf}
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_|Magnetisierung|_geordnet_aequilibriert_kBT3.pdf}
+\caption{Magnetisierung $\braket{m}$ und deren Betrag $\braket{|m|}$ in Abhängigkeit von der Simulationszeit $t$ für $k_\text{B}T=3$ bei geordnetem Anfangszustand.}
+\label{fig:magnetisierung_geordnet_kBT3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_Magnetisierung_zufall_aequilibriert_kBT1.pdf}
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_|Magnetisierung|_zufall_aequilibriert_kBT1.pdf}
+\caption{Magnetisierung $\braket{m}$ und deren Betrag $\braket{|m|}$ in Abhängigkeit von der Simulationszeit $t$ für $k_\text{B}T=1$ bei zufälligem Anfangszustand.}
+\label{fig:magnetisierung_zufall_kBT1}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_Magnetisierung_zufall_aequilibriert_kBT227.pdf}
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_|Magnetisierung|_zufall_aequilibriert_kBT227.pdf}
+\caption{Magnetisierung $\braket{m}$ und deren Betrag $\braket{|m|}$ in Abhängigkeit von der Simulationszeit $t$ für $k_\text{B}T=\num{2,27}$ bei zufälligem Anfangszustand.}
+\label{fig:magnetisierung_zufall_kBT227}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_Magnetisierung_zufall_aequilibriert_kBT3.pdf}
+\includegraphics[width=0.49\textwidth]{../Plots/2_B_|Magnetisierung|_zufall_aequilibriert_kBT3.pdf}
+\caption{Magnetisierung $\braket{m}$ und deren Betrag $\braket{|m|}$ in Abhängigkeit von der Simulationszeit $t$ für $k_\text{B}T=3$ bei zufälligem Anfangszustand.}
+\label{fig:magnetisierung_zufall_kBT3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../Plots/2_C_Magnetisierung_grobfein_ganz.pdf}
+\caption{Magnetisierung $\braket{m}$ in Abhängigkeit von der Temperatur $T$ bei geordnetem Anfangszustand.}
+\label{fig:magnetisierung}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../Plots/2_C_|Magnetisierung|_grobfein_ganz.pdf}
+\caption{Betrag der Magnetisierung $\braket{|m|}$ in Abhängigkeit von der Temperatur $T$ bei geordnetem Anfangszustand.}
+\label{fig:|magnetisierung|}
+\end{figure}
+
+Die Magnetisierung $\braket{m}$ in Abhängigkeit von der Temperatur $T$ schwankt sehr stark für kleine Temperaturen (nahe an 1) und weniger für große ($\rightarrow3$).
+An der Stelle der kritischen Temperatur gibt es einen Peak.
+
+\newpage
+
+\subsection*{d)}
+Aus den Energiefluktuationen soll die spezifische Wärme pro Spin \[c(T)=\frac{\braket{\mathcal{H}^2}-\braket{\mathcal{H}}^2}{k_\text{B}T^2N}\] berechnet werden.
+Das Ergebnis ist in \cref{fig:spez} dargestellt.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../Plots/2_D_Energiefluktuation_grobfein_ganz.pdf}
+\caption{Spezifische Wärme $c$ in Abhängigkeit von der Temperatur $T$ bei geordnetem Anfangszustand.}
+\label{fig:spez}
+\end{figure}

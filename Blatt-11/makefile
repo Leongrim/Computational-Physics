@@ -1,7 +1,7 @@
 CC = g++
 PY = python
-CFLAGS = -std=c++11 -Wall -O3 -march=native -c
-LDFLAGS =
+CFLAGS = -std=c++11 -Wall -O3 -march=native -c 
+LDFLAGS = -fopenmp
 AUFGABE1_SOURCES = Aufgabe1.cpp
 AUFGABE2_SOURCES = Aufgabe2.cpp
 
@@ -19,6 +19,7 @@ aufgabe1: $(EXECUTABLE)
 
 aufgabe2: $(AUFGABE2_EXECUTABLE)
 
+
 $(EXECUTABLE): $(AUFGABE1_OBJECTS)
 	$(CC) -o $@ $(AUFGABE1_OBJECTS) $(LDFLAGS)
 
@@ -26,4 +27,4 @@ $(AUFGABE2_EXECUTABLE): $(AUFGABE2_OBJECTS)
 	$(CC) -o $@ $(AUFGABE2_OBJECTS) $(LDFLAGS)  
 
 .cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $(LDFLAGS) $< -o $@
